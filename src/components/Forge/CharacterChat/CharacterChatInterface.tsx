@@ -686,9 +686,9 @@ export default function CharacterChatInterface({
             aria-relevant="additions"
           >
             <div className="flex space-x-1">
-              <div className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-              <div className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
-              <div className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '600ms' }}></div>
+              <div className="w-2 h-2 bg-primary/40 dark:bg-primary/60 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+              <div className="w-2 h-2 bg-primary/40 dark:bg-primary/60 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+              <div className="w-2 h-2 bg-primary/40 dark:bg-primary/60 rounded-full animate-bounce" style={{ animationDelay: '600ms' }}></div>
             </div>
             <span className="sr-only">Character is typing...</span>
           </div>
@@ -731,7 +731,7 @@ export default function CharacterChatInterface({
             className={`px-4 py-3 rounded-lg ${
               isUser 
                 ? 'bg-primary text-white ml-2 shadow-sm' 
-                : 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 shadow-sm'
+                : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 shadow-sm'
             } ${message.status === 'failed' ? 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200' : ''}`}
           >
             <p className="whitespace-pre-wrap">{parsedContent.text}</p>
@@ -745,9 +745,9 @@ export default function CharacterChatInterface({
                   key={option.id}
                   onClick={() => handleMessageOption(option.action || option.text)}
                   className="flex items-center justify-between w-full text-left px-4 py-3 rounded-md 
-                    bg-white dark:bg-gray-750 hover:bg-primary/5 dark:hover:bg-primary/10 
-                    text-gray-800 dark:text-gray-100 transition-all duration-200 
-                    border border-gray-200 dark:border-gray-600 
+                    bg-white dark:bg-gray-800 hover:bg-primary-lightest dark:hover:bg-primary-dark/10 
+                    text-neutral-800 dark:text-neutral-200 transition-all duration-200 
+                    border border-neutral-200 dark:border-neutral-700 
                     shadow-sm hover:shadow-md transform hover:-translate-y-px
                     font-poppins"
                 >
@@ -809,158 +809,165 @@ export default function CharacterChatInterface({
   }, [messageState.messages, selectedCharacter]);
 
   return (
-    <div className="flex h-full">
-      {/* Sidebar for character selection */}
-      <div 
-        className={`w-72 bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 
-                   flex-shrink-0 overflow-hidden transition-all 
-                   ${isMobileMenuOpen ? 'block absolute inset-y-0 left-0 z-50 h-full' : 'hidden md:block'}`}
-      >
-        <div className="flex flex-col h-full">
-          {/* Sidebar header */}
-          <div className="p-4 border-b border-gray-200 dark:border-gray-700">
-            <div className="flex flex-col">
-              <h2 className="text-lg font-semibold font-poppins text-gray-900 dark:text-white">Genesis Engine</h2>
-              <p className="text-sm text-primary-dark dark:text-primary-light font-medium mb-2 font-poppins">
-                Transformation Catalysts
-              </p>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
-                Engage with our AI characters designed to challenge conventional thinking and inspire innovation.
-              </p>
-            </div>
-            <div className="relative">
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Discover characters..."
-                className="w-full p-2 pl-8 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary text-gray-900 dark:text-white disabled:opacity-50"
-                aria-label="Search characters"
-              />
-              <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-primary/70 w-4 h-4" />
-            </div>
-            {isMobileMenuOpen && (
-              <Button 
-                onClick={() => setIsMobileMenuOpen(false)}
-                variant="ghost"
-                size="sm"
-                className="mt-2 md:hidden w-full"
-              >
-                Close
-              </Button>
-            )}
+    <div className="h-full flex flex-col md:flex-row">
+      {/* Character Selection Sidebar */}
+      <div className={`
+        ${isMobileMenuOpen ? 'block' : 'hidden'} md:block
+        w-full md:w-80 lg:w-96 h-full md:h-auto
+        border-r border-neutral-200 dark:border-neutral-700
+        bg-white dark:bg-neutral-950
+        overflow-hidden flex flex-col z-20 md:z-0
+        ${isMobileMenuOpen ? 'absolute inset-0' : ''}
+      `}>
+        {/* Header */}
+        <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
+          <h2 className="text-xl font-poppins font-semibold text-neutral-900 dark:text-white">Genesis Engine</h2>
+          <button
+            className="md:hidden text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+            onClick={() => setIsMobileMenuOpen(false)}
+            aria-label="Close sidebar"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        
+        {/* Info/Subtitle */}
+        <div className="p-4 bg-primary-lightest dark:bg-primary-dark/20 text-neutral-800 dark:text-neutral-200">
+          <p className="text-sm">Transformation Catalysts</p>
+          <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
+            Converse with AI characters designed to challenge conventional thinking and inspire innovation.
+          </p>
+        </div>
+        
+        {/* Search */}
+        <div className="p-4 border-b border-gray-200 dark:border-gray-700">
+          <div className="relative">
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Discover characters..."
+              className="w-full p-2 pl-8 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-600 rounded-md 
+                       focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-primary-light focus:border-transparent
+                       text-neutral-800 dark:text-neutral-200"
+              aria-label="Search characters"
+            />
+            <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-primary/70 w-4 h-4" />
           </div>
-          
-          {/* Character list */}
-          <div className="flex-1 overflow-y-auto p-4">
-            {filteredCharacters.length === 0 ? (
-              <p className="text-gray-500 dark:text-gray-400 text-center mt-4">No characters found</p>
-            ) : (
-              <div className="space-y-2">
-                {filteredCharacters.map(character => (
-                  <button
-                    key={character.id}
-                    onClick={() => handleCharacterSelect(character)}
-                    className={`w-full flex items-center p-4 rounded-lg text-left transition-colors mb-2 ${
-                      selectedCharacter?.id === character.id
-                        ? 'bg-primary/10 dark:bg-primary/30 text-primary-dark dark:text-primary-light'
-                        : 'hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white'
-                    }`}
-                  >
-                    <div className="relative w-12 h-12 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 mr-4 flex-shrink-0">
-                      <Image
-                        src={getCharacterImagePath(character.id)}
-                        alt={character.name}
-                        fill
-                        sizes="48px"
-                        className="object-cover"
-                        onError={(e) => handleImageError(e, character.id)}
-                      />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <h3 className="font-medium font-poppins text-base truncate">{character.name}</h3>
-                      {character.title && (
-                        <p className="text-sm text-gray-500 dark:text-gray-400 truncate">{character.title}</p>
-                      )}
-                    </div>
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
+        </div>
+        
+        {/* Character list */}
+        <div className="flex-1 overflow-y-auto p-4">
+          {filteredCharacters.length === 0 ? (
+            <p className="text-neutral-600 dark:text-neutral-400 text-center py-4">No characters found</p>
+          ) : (
+            <div className="space-y-2">
+              {filteredCharacters.map(character => (
+                <div 
+                  key={character.id}
+                  onClick={() => handleCharacterSelect(character)}
+                  onKeyDown={(e) => handleKeyNavigation(e, character.id)}
+                  tabIndex={0}
+                  className={`
+                    flex items-center p-4 cursor-pointer transition-all duration-200
+                    ${selectedCharacter?.id === character.id 
+                      ? 'bg-primary-lightest dark:bg-primary-dark/20 border-l-4 border-primary dark:border-primary-light' 
+                      : 'hover:bg-gray-50 dark:hover:bg-gray-800 border-l-4 border-transparent'}
+                    ${isImageLoading[character.id] ? 'opacity-70' : 'opacity-100'}
+                  `}
+                  role="button"
+                  aria-pressed={selectedCharacter?.id === character.id}
+                >
+                  <div className="relative w-12 h-12 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 mr-4 flex-shrink-0">
+                    <Image
+                      src={getCharacterImagePath(character.id)}
+                      alt={character.name}
+                      width={48}
+                      height={48}
+                      className="object-cover"
+                      onError={(e) => handleImageError(e, character.id)}
+                      onLoad={() => handleImageLoad(character.id)}
+                      onLoadStart={() => setImageLoading(character.id)}
+                    />
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="font-medium text-neutral-900 dark:text-white truncate">{character.name}</h3>
+                    {character.title && (
+                      <p className="text-sm text-neutral-500 dark:text-neutral-400 truncate">{character.title}</p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
       
-      {/* Main chat area */}
-      <div className="flex-1 flex flex-col h-full overflow-hidden">
-        {/* Chat header */}
-        <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-4 flex items-center shadow-sm">
-          <Button 
+      {/* Chat Content Area */}
+      <div className="flex-1 flex flex-col overflow-hidden relative">
+        {/* Mobile menu toggle */}
+        {!isMobileMenuOpen && (
+          <button
+            className="md:hidden absolute top-4 left-4 z-10 p-2 bg-white dark:bg-neutral-800 rounded-full shadow-md 
+                       text-neutral-800 dark:text-neutral-200 border border-neutral-200 dark:border-neutral-700"
             onClick={() => setIsMobileMenuOpen(true)}
-            variant="ghost"
-            size="icon"
-            className="mr-2 md:hidden"
-            aria-label="Open character menu"
+            aria-label="Open character selection"
           >
-            <Menu className="w-6 h-6" />
-          </Button>
-          
-          {selectedCharacter ? (
-            <div className="flex items-center">
-              <div className="relative w-10 h-10 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 mr-3">
+            <Menu className="w-5 h-5" />
+          </button>
+        )}
+        
+        {/* Empty state - no character selected */}
+        {!selectedCharacter && (
+          <div className="flex flex-col items-center justify-center h-full p-8 text-center">
+            <div className="w-16 h-16 rounded-full bg-primary-lightest dark:bg-primary-dark/20 flex items-center justify-center mb-4">
+              <svg className="w-8 h-8 text-primary dark:text-primary-light" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              </svg>
+            </div>
+            <h3 className="text-xl font-poppins font-semibold text-neutral-900 dark:text-white mb-2">Select a Character</h3>
+            <p className="text-neutral-600 dark:text-neutral-400 max-w-sm">
+              Choose a character from the left to start a conversation. Each character brings unique perspectives to help inspire innovative thinking.
+            </p>
+          </div>
+        )}
+        
+        {/* Conversation Area - Only show when character selected */}
+        {selectedCharacter && (
+          <div className="flex-1 flex flex-col h-full">
+            {/* Character info header */}
+            <div className="flex items-center p-3 bg-white dark:bg-neutral-800 rounded-lg shadow-sm m-4
+                           border border-neutral-200 dark:border-neutral-700">
+              <div className="w-10 h-10 rounded-full overflow-hidden bg-neutral-200 dark:bg-neutral-700 mr-3">
                 <Image
                   src={getCharacterImagePath(selectedCharacter.id)}
                   alt={selectedCharacter.name}
-                  fill
-                  sizes="40px"
-                  className={`object-cover ${isImageLoading[selectedCharacter.id] ? 'opacity-0' : 'opacity-100'} transition-opacity duration-200`}
+                  width={40}
+                  height={40}
+                  className="object-cover"
                   onError={(e) => handleImageError(e, selectedCharacter.id)}
-                  onLoad={() => handleImageLoad(selectedCharacter.id)}
-                  onLoadStart={() => setImageLoading(selectedCharacter.id)}
-                  priority
                 />
-                {isImageLoading[selectedCharacter.id] && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-gray-200 dark:bg-gray-700">
-                    <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
-                  </div>
-                )}
               </div>
               <div>
-                <h2 className="text-lg font-semibold font-poppins text-gray-900 dark:text-white">{selectedCharacter.name}</h2>
+                <h3 className="font-poppins font-semibold text-neutral-900 dark:text-white">{selectedCharacter.name}</h3>
                 {selectedCharacter.title && (
-                  <p className="text-sm font-medium font-poppins text-gray-700 dark:text-gray-300">{selectedCharacter.title}</p>
+                  <p className="text-sm text-neutral-600 dark:text-neutral-400">{selectedCharacter.title}</p>
                 )}
               </div>
             </div>
-          ) : (
-            <div>
-              <h1 className="text-lg font-semibold font-poppins text-gray-900 dark:text-white">{title}</h1>
-              <p className="text-sm text-gray-500 dark:text-gray-400">{subtitle}</p>
-            </div>
-          )}
-          
-          {isStreaming && (
-            <button
-              onClick={handleStopGeneration}
-              className="ml-auto text-primary-dark hover:text-primary dark:text-primary-light dark:hover:text-primary text-sm"
+            
+            {/* Messages Area */}
+            <div 
+              className="flex-1 overflow-y-auto p-4 bg-neutral-50 dark:bg-neutral-900"
+              ref={messagesEndRef}
+              aria-live="polite"
+              aria-relevant="additions"
+              id="messages-container"
             >
-              Stop generating
-            </button>
-          )}
-        </div>
-        
-        {/* Messages */}
-        <div 
-          className="flex-1 overflow-y-auto p-4 bg-white dark:bg-gray-900 relative scroll-smooth"
-          aria-live="polite"
-          aria-atomic="false"
-          aria-relevant="additions"
-          id="messages-container"
-        >
-          {messageState.messages.length === 0 ? (
-            <div className="h-full flex flex-col items-center justify-center pb-8">
-              {selectedCharacter ? (
-                <>
+              {messageState.messages.length === 0 ? (
+                <div className="h-full flex flex-col items-center justify-center pb-8">
                   <div className="relative w-24 h-24 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 mb-4 ring-4 ring-primary/20">
                     <Image
                       src={getCharacterImagePath(selectedCharacter.id)}
@@ -980,7 +987,7 @@ export default function CharacterChatInterface({
                       </div>
                     )}
                   </div>
-                  <h2 className="text-2xl font-semibold font-poppins text-gray-900 dark:text-white mb-2">
+                  <h2 className="text-2xl font-semibold font-poppins text-neutral-900 dark:text-white mb-2">
                     {selectedCharacter.name}
                   </h2>
                   {selectedCharacter.title && (
@@ -988,87 +995,94 @@ export default function CharacterChatInterface({
                       {selectedCharacter.title}
                     </p>
                   )}
-                  {selectedCharacter.description && (
-                    <p className="text-center text-gray-600 dark:text-gray-400 max-w-md mb-6 leading-relaxed">
-                      {selectedCharacter.description}
+                  {selectedCharacter.shortBio && (
+                    <p className="text-center text-neutral-600 dark:text-neutral-400 max-w-md mb-6 leading-relaxed">
+                      {selectedCharacter.shortBio}
                     </p>
                   )}
-                </>
+                </div>
               ) : (
-                <div className="text-center">
-                  <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg max-w-md mx-auto mb-4">
-                    <p className="text-gray-500 dark:text-gray-400 mb-4">
-                      Select a character from the sidebar to start chatting with Genesis Engine AI characters.
-                    </p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      Each character has their own unique personality, expertise, and conversation style.
-                    </p>
-                  </div>
+                <div>
+                  {messageState.messages.map(message => renderMessage(message))}
+                  <div ref={messagesEndRef} />
                 </div>
               )}
             </div>
-          ) : (
-            <div className="space-y-4 pb-4">
-              {messageState.messages.map(renderMessage)}
-              <div ref={messagesEndRef} />
+            
+            {/* Message input area at bottom */}
+            <div className="mt-auto border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-neutral-800">
+              <form onSubmit={handleSendMessage} className="p-4 flex items-center">
+                <div className="hidden md:flex items-center mr-4">
+                  {selectedCharacter && (
+                    <div className="w-8 h-8 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 mr-2">
+                      <Image
+                        src={getCharacterImagePath(selectedCharacter.id)}
+                        alt={selectedCharacter.name}
+                        width={32}
+                        height={32}
+                        className="object-cover"
+                        onError={(e) => handleImageError(e, selectedCharacter.id)}
+                      />
+                    </div>
+                  )}
+                </div>
+                
+                <input 
+                  type="text"
+                  ref={inputRef}
+                  value={messageText}
+                  onChange={(e) => setMessageText(e.target.value)}
+                  placeholder={`Send a message to ${selectedCharacter.name}...`}
+                  disabled={isStreaming}
+                  className="flex-1 p-2 px-4 border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 rounded-full 
+                           focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-primary-light focus:border-transparent 
+                           text-neutral-800 dark:text-neutral-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                  aria-label="Message input"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey && messageText.trim()) {
+                      e.preventDefault();
+                      handleSendMessage(e);
+                    }
+                  }}
+                />
+                
+                <button
+                  type="submit"
+                  disabled={!messageText.trim() || isStreaming}
+                  className="ml-2 p-2 bg-primary hover:bg-primary-light disabled:bg-neutral-300 dark:disabled:bg-neutral-700 
+                           text-white rounded-full transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                  aria-label="Send message"
+                >
+                  <ArrowRight className="w-5 h-5" />
+                </button>
+              </form>
             </div>
-          )}
-        </div>
-        
-        {/* Message input */}
-        <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm">
-          <form onSubmit={handleSendMessage} className="flex space-x-2">
-            <input
-              ref={inputRef}
-              type="text"
-              value={messageText}
-              onChange={(e) => setMessageText(e.target.value)}
-              placeholder={selectedCharacter ? `Send a message to ${selectedCharacter.name}...` : "Select a character first"}
-              disabled={!selectedCharacter || isStreaming}
-              className="flex-1 p-2 px-4 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-full focus:outline-none focus:ring-2 focus:ring-primary text-gray-900 dark:text-white disabled:opacity-50"
-              aria-label="Message input"
-            />
-            <Button
-              type="submit"
-              variant="primary"
-              disabled={!messageText.trim() || !selectedCharacter || isStreaming}
-              className="p-2 rounded-full disabled:opacity-50"
-              aria-label="Send message"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-              </svg>
-            </Button>
-          </form>
-        </div>
+          </div>
+        )}
       </div>
       
       {/* Error toast message */}
       {errorMessage && (
-        <div 
-          className="fixed top-4 right-4 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded shadow-md z-50"
-          role="alert"
-        >
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white dark:bg-gray-800 border border-red-200 dark:border-red-900 rounded-lg shadow-lg p-4 flex justify-between items-center min-w-[320px] max-w-md z-50">
           <div className="flex">
             <div className="py-1">
               <svg className="w-6 h-6 mr-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 1118 0 9 9 0 0118 0z"></path>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 1118 0 9 9 0 0118 0z"></path>
               </svg>
             </div>
             <div>
-              <p className="font-semibold">Error</p>
-              <p className="text-sm">{errorMessage}</p>
+              <p className="text-gray-900 dark:text-gray-100 font-medium">Error</p>
+              <p className="text-gray-700 dark:text-gray-300 text-sm">{errorMessage}</p>
             </div>
-            <button 
-              onClick={() => setErrorMessage(null)}
-              className="ml-auto text-red-500 hover:text-red-700"
-              aria-label="Dismiss error message"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
-              </svg>
-            </button>
           </div>
+          <button
+            onClick={() => setErrorMessage('')}
+            aria-label="Dismiss error message"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
         </div>
       )}
     </div>

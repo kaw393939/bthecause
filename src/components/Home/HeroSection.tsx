@@ -8,7 +8,7 @@ import Paragraph from '../Common/Paragraph';
 
 const HeroSection = () => (
   <section
-    className="min-h-[90vh] flex flex-col justify-center text-white bg-[url('/hero_star_bg.png')] bg-cover bg-center bg-no-repeat relative overflow-hidden pt-20 sm:pt-24 md:pt-32"
+    className="min-h-[90vh] flex flex-col justify-center text-white bg-[url('/hero_bg.png')] bg-cover bg-center bg-no-repeat relative overflow-hidden pt-20 sm:pt-24 md:pt-32"
   >
     {/* Overlay with improved contrast for text readability */}
     <div

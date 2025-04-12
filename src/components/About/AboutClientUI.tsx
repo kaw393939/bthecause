@@ -99,11 +99,11 @@ export const AboutClientUI: React.FC<AboutClientUIProps> = ({ aboutData }) => {
               </Paragraph>
               <div className="flex justify-center">
                 <Image
-                  src="/theo_keith.png" // Replace with actual image of 4 friends as a village
-                  alt="4 Friends as a Village"
-                  width={150}
-                  height={150}
-                  className="rounded-md"
+                  src="/images/about/2_3_transform.png"
+                  alt="Educational Transformation Architects"
+                  width={300}
+                  height={200}
+                  className="rounded-md object-cover"
                 />
               </div>
             </div>

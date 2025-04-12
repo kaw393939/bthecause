@@ -102,7 +102,7 @@ PART 4: THE HOW - STRATEGY & EXECUTION
 
 4.1. Strategic Advantages & Influence Levers (Influence)
 
-Authority: Leverage founder expertise ([Your Name]) and unparalleled partner credibility ([Arne Duncan]) strategically in stakeholder engagement, fundraising, and building trust.
+Authority: Leverage founder expertise ([Your Name]) and unparalleled partner credibility strategically in stakeholder engagement, fundraising, and building trust.
 
 Social Proof: Utilize pilot program successes (5 initial agreements) and subsequent case studies/testimonials to validate the approach and reduce adoption barriers.
 

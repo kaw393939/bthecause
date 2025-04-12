@@ -35,10 +35,11 @@ const AboutSection: React.FC = () => {
 
           <div className="relative rounded-lg overflow-hidden shadow-lg h-80 md:h-full min-h-[320px]">
             <Image
-              src="/images/about/students-learning.jpg"
-              alt="Students engaged in learning"
+              src="/images/about/2_1_collaborative.png"
+              alt="Collaborative Learning Architecture"
               fill
-              className="object-cover"
+              className="object-cover object-top"
+              style={{ objectPosition: '50% 30%' }}
             />
           </div>
         </div>
@@ -46,8 +47,8 @@ const AboutSection: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="order-2 md:order-1 relative rounded-lg overflow-hidden shadow-lg h-80 md:h-full min-h-[320px]">
             <Image
-              src="/images/about/keith.jpg"
-              alt="Keith Williams, Founder"
+              src="/images/about/2_2_wisdom.png"
+              alt="Educational Wisdom Council"
               fill
               className="object-cover"
             />
