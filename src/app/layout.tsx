@@ -1,23 +1,31 @@
 import React from 'react';
 import "./globals.css";
-import { Inter, Public_Sans } from 'next/font/google'; 
+import { Montserrat, Open_Sans, Fira_Code } from 'next/font/google'; 
 import { siteConfig } from '@/config/site';
 import { Analytics } from '@vercel/analytics/react';
 
-// Configure Inter for headings
-const inter = Inter({
+// Configure Montserrat for headings - Transformation & Educational Authority
+const montserrat = Montserrat({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-inter', 
-  weight: ['500', '600', '700', '800'] 
+  variable: '--font-montserrat', 
+  weight: ['400', '500', '600', '700'] 
 });
 
-// Configure Public Sans for body/UI
-const publicSans = Public_Sans({
+// Configure Open Sans for body/UI - Clarity & Approachability
+const openSans = Open_Sans({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-public-sans', 
+  variable: '--font-open-sans', 
   weight: ['400', '500', '600', '700'] 
+});
+
+// Configure Fira Code for code blocks - Technical Precision
+const firaCode = Fira_Code({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-mono',
+  weight: ['400', '500', '700']
 });
 
 import Header from '../components/Layout/Header'; 
@@ -66,7 +74,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${publicSans.variable} scroll-smooth`} suppressHydrationWarning>
+    <html lang="en" className={`${montserrat.variable} ${openSans.variable} ${firaCode.variable} scroll-smooth`} suppressHydrationWarning>
       <body className="min-h-screen font-sans antialiased bg-background text-foreground dark:bg-background dark:text-foreground">
         <Header />
         {/* Remove top padding to eliminate the white space */}

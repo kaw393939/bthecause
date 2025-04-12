@@ -43,145 +43,193 @@ const LoadingSpinnerSVG = () => (
 );
 
 interface SearchBarProps {
-  data: GraphNode[];
-  onSelect: (node: GraphNode | null) => void;
+  data?: GraphNode[];
+  onSelect?: (node: GraphNode | null) => void;
   onSearchChange?: (query: string) => void;
+  value?: string;
+  onChange?: (value: string) => void;
+  placeholder?: string;
+  className?: string;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ data, onSelect, onSearchChange }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ 
+  data = [], 
+  onSelect, 
+  onSearchChange,
+  value: externalValue,
+  onChange: externalOnChange,
+  placeholder = "Search...",
+  className = ""
+}) => {
+  const [query, setQuery] = useState('');
   const [selectedNode, setSelectedNode] = useState<GraphNode | null>(null);
-  const [inputValue, setInputValue] = useState('');
-  const [options, setOptions] = useState<GraphNode[]>([]);
-  const [isOpen, setIsOpen] = useState(false); 
-  const loading = isOpen && options.length === 0 && data.length > 0 && inputValue === ''; 
-
-  useEffect(() => {
-    if (data.length > 0) {
-      setOptions(data);
+  const [isLoading, setIsLoading] = useState(false);
+  const [filteredNodes, setFilteredNodes] = useState<GraphNode[]>([]);
+  
+  // Handle controlled vs uncontrolled input
+  const isControlled = externalValue !== undefined && externalOnChange !== undefined;
+  const currentValue = isControlled ? externalValue : query;
+  
+  // Handle query changes (internal state updates)
+  const handleQueryChange = (newQuery: string) => {
+    if (isControlled) {
+      // If component is controlled externally, call the external handler
+      externalOnChange(newQuery);
+    } else {
+      // Otherwise update internal state
+      setQuery(newQuery);
     }
-  }, [data]);
-
-  useEffect(() => {
-    if (!isOpen) {
-      setOptions([]); 
-      return;
-    }
-
-    if (inputValue === '') {
-      setOptions(data.slice(0, 10)); 
-      return;
-    }
-
-    const filtered = data.filter(
-      (option) =>
-        (option.name?.toLowerCase() ?? '').includes(inputValue.toLowerCase()) ||
-        (option.era?.toLowerCase() ?? '').includes(inputValue.toLowerCase()) ||
-        (option.community !== undefined && String(option.community).toLowerCase().includes(inputValue.toLowerCase()))
-    );
     
-    setOptions(filtered.slice(0, 15)); 
-  }, [inputValue, isOpen, data]);
-
+    // Notify parent of search change if callback provided
+    if (onSearchChange) {
+      onSearchChange(newQuery);
+    }
+    
+    // If no data was provided, nothing to filter
+    if (!data || data.length === 0) {
+      setFilteredNodes([]);
+      return;
+    }
+    
+    // Filter data based on query
+    if (newQuery.trim() === '') {
+      setFilteredNodes([]);
+    } else {
+      setIsLoading(true);
+      
+      // Simulate API delay for smoother UX
+      setTimeout(() => {
+        const searchTerms = newQuery.toLowerCase().split(' ').filter(Boolean);
+        const filtered = data.filter(node => {
+          if (!node) return false;
+          
+          // Search in multiple fields
+          const searchableFields = [
+            node.name || '',
+            node.era || '',
+            node.description || '',
+            ...(Array.isArray(node.keywords) ? node.keywords : [])
+          ].map(field => field.toLowerCase());
+          
+          // All search terms must match at least one field
+          return searchTerms.every(term => 
+            searchableFields.some(field => field.includes(term))
+          );
+        });
+        
+        setFilteredNodes(filtered);
+        setIsLoading(false);
+      }, 150);
+    }
+  };
+  
+  // Handle node selection
+  const handleNodeSelect = (node: GraphNode | null) => {
+    setSelectedNode(node);
+    if (onSelect) {
+      onSelect(node);
+    }
+    // Reset the search query after selection
+    if (!isControlled) {
+      setQuery('');
+    } else if (externalOnChange) {
+      externalOnChange('');
+    }
+    setFilteredNodes([]);
+  };
+  
+  useEffect(() => {
+    // If data changes, we may need to update filtered nodes
+    if (currentValue.trim() !== '') {
+      handleQueryChange(currentValue);
+    }
+  }, [data]); // eslint-disable-line react-hooks/exhaustive-deps
+  
   return (
-    <div className="relative w-full"> 
-      <Combobox 
-        value={selectedNode} 
-        onChange={(selected) => { 
-          setSelectedNode(selected);
-          onSelect(selected);
-          setInputValue(selected?.name || ''); 
-          setIsOpen(false); 
-        }} 
-        nullable 
-      >
+    <div className={`relative w-full ${className}`}>
+      <Combobox value={selectedNode} onChange={handleNodeSelect}>
         <div className="relative">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <SearchIconSVG />
+          <div className="relative w-full cursor-default overflow-hidden rounded-md bg-white text-left shadow-sm border border-gray-300 dark:border-gray-600 dark:bg-gray-800 transition-all focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500">
+            <Combobox.Input
+              className="w-full py-2 pl-10 pr-3 text-sm leading-5 text-gray-900 dark:text-gray-100 bg-transparent focus:outline-none focus:ring-0 border-none"
+              value={currentValue}
+              onChange={(event) => handleQueryChange(event.target.value)}
+              placeholder={placeholder}
+              spellCheck={false}
+            />
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              {isLoading ? <LoadingSpinnerSVG /> : <SearchIconSVG />}
+            </div>
           </div>
-          <Combobox.Input
-            className="w-full rounded-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 
-                       py-2 pl-10 pr-10 text-sm leading-5 text-gray-900 dark:text-gray-100 
-                       focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none 
-                       shadow-sm hover:shadow-md focus:shadow-lg transition-shadow duration-200"
-            placeholder="Search philosophers..."
-            displayValue={(node: GraphNode) => node?.name || ''}
-            onChange={(event) => {
-              const newInputValue = event.target.value;
-              setInputValue(newInputValue);
-              if (!isOpen) setIsOpen(true); 
-              if (onSearchChange) {
-                onSearchChange(newInputValue);
-              }
+          
+          <Transition
+            as={Fragment}
+            leave="transition ease-in duration-100"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+            afterLeave={() => {
+              // Clean up operations after dropdown closes
             }}
-            onFocus={() => setIsOpen(true)} 
-            // Consider onBlur to close if needed, but selection/escape should handle it
-          />
-          <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
-            {loading && <LoadingSpinnerSVG />} 
-          </div>
-        </div>
-
-        <Transition
-          as={Fragment}
-          show={isOpen} 
-          afterLeave={() => setInputValue(selectedNode?.name || '')} 
-          leave="transition ease-in duration-100"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <Combobox.Options 
-            static 
-            className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md 
-                       bg-white dark:bg-gray-700 py-1 text-base shadow-lg 
-                       ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
           >
-            {loading && (
-               <div className="relative cursor-default select-none py-2 px-4 text-gray-700 dark:text-gray-300">Loading...</div>
-            )}
-            {!loading && options.length === 0 && inputValue !== '' ? (
-              <div className="relative cursor-default select-none py-2 px-4 text-gray-700 dark:text-gray-300">
-                No philosophers found.
-              </div>
-            ) : (
-              options.map((node) => {
-                const communityValue = node.community?.toString() ?? '0';
-                const communityNumber = parseInt(communityValue, 10);
-                const colorHue = isNaN(communityNumber) ? 0 : (communityNumber * 137.5) % 360;
-                const avatarColor = node.community !== undefined ? `hsl(${colorHue}, 60%, 60%)` : '#9ca3af'; 
-
-                return (
+            <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white dark:bg-gray-800 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+              {filteredNodes.length === 0 && currentValue !== '' ? (
+                <div className="relative cursor-default select-none py-2 px-4 text-gray-500 dark:text-gray-400">
+                  {isLoading ? "Searching..." : "No results found."}
+                </div>
+              ) : (
+                filteredNodes.map((node) => (
                   <Combobox.Option
                     key={node.id}
                     className={({ active }) =>
-                      `relative cursor-default select-none py-2 pl-4 pr-4 
-                       ${active ? 'bg-blue-100 dark:bg-blue-600 text-blue-900 dark:text-white' : 'text-gray-900 dark:text-gray-100'}`
+                      `relative cursor-pointer select-none py-2 pl-10 pr-4 ${
+                        active
+                          ? 'bg-blue-600 text-white'
+                          : 'text-gray-900 dark:text-gray-100'
+                      }`
                     }
                     value={node}
                   >
                     {({ selected, active }) => (
-                      <div className="flex items-center"> 
-                        <div 
-                          className="w-8 h-8 rounded-full mr-3 flex-shrink-0 flex items-center justify-center text-white text-sm font-medium"
-                          style={{ backgroundColor: avatarColor }}
+                      <>
+                        <span
+                          className={`block truncate ${
+                            selected ? 'font-medium' : 'font-normal'
+                          }`}
                         >
-                          {node.name?.charAt(0).toUpperCase() ?? '-'} 
-                        </div>
-                        <div className="flex-grow truncate">
-                          <p className={`text-sm truncate ${selected ? 'font-semibold' : 'font-normal'}`}>
-                            {node.name ?? 'Unnamed Node'}
-                          </p>
-                          <p className={`text-xs truncate ${active ? 'text-blue-800 dark:text-blue-200' : 'text-gray-500 dark:text-gray-400'}`}>
-                            {node.era ?? 'Unknown Era'} • {node.community !== undefined ? `Group ${node.community}` : 'Unknown group'}
-                          </p>
-                        </div>
-                      </div>
+                          {node.name}
+                        </span>
+                        {node.era && (
+                          <span
+                            className={`block truncate text-xs ${
+                              active ? 'text-blue-100' : 'text-gray-500 dark:text-gray-400'
+                            }`}
+                          >
+                            {node.era}
+                          </span>
+                        )}
+                        {selected ? (
+                          <span
+                            className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
+                              active ? 'text-white' : 'text-blue-600'
+                            }`}
+                          >
+                            <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                              <path
+                                fillRule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </span>
+                        ) : null}
+                      </>
                     )}
                   </Combobox.Option>
-                );
-              })
-            )}
-          </Combobox.Options>
-        </Transition>
+                ))
+              )}
+            </Combobox.Options>
+          </Transition>
+        </div>
       </Combobox>
     </div>
   );

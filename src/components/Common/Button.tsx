@@ -32,6 +32,11 @@ type NativeButtonProps = BaseButtonProps &
 // Combined type using discriminated union based on href
 type ButtonProps = LinkButtonProps | NativeButtonProps;
 
+/**
+ * Button component following Bthecause spacing guide.
+ * Implements the 8pt grid system for consistent spacing
+ * and aligns with Bthecause's brand identity for educational transformation.
+ */
 const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
   ({
     children,
@@ -51,26 +56,28 @@ const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPro
     const baseStyles =
       'inline-flex items-center justify-center font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 transition ease-in-out duration-150 disabled:opacity-50 disabled:cursor-not-allowed';
 
+    // Updated variant styles to match Bthecause's color palette
     const variantStyles = {
       primary:
-        'bg-primary text-white hover:bg-primary-dark focus:ring-primary border border-transparent',
+        'bg-purple-500 text-white hover:bg-purple-600 focus:ring-purple-500 border border-transparent',
       secondary:
-        'bg-secondary text-neutral-900 hover:bg-secondary-dark hover:text-white focus:ring-secondary border border-transparent dark:bg-secondary-dark dark:text-neutral-100 dark:hover:bg-secondary',
+        'bg-turquoise-500 text-white hover:bg-turquoise-600 focus:ring-turquoise-500 border border-transparent dark:bg-turquoise-400',
       accent:
-        'bg-accent text-white hover:bg-accent-dark focus:ring-accent border border-transparent',
+        'bg-amber-500 text-white hover:bg-amber-600 focus:ring-amber-500 border border-transparent',
       outline:
-        'border border-primary text-primary bg-transparent hover:bg-primary/10 focus:ring-primary dark:border-primary dark:text-primary dark:hover:bg-primary/20',
+        'border border-purple-500 text-purple-500 bg-transparent hover:bg-purple-50 focus:ring-purple-500 dark:border-purple-400 dark:text-purple-400 dark:hover:bg-purple-900/20',
       ghost:
-        'text-primary hover:bg-primary/10 focus:ring-primary dark:text-primary dark:hover:bg-primary/20 border border-transparent',
+        'text-purple-500 hover:bg-purple-50 focus:ring-purple-500 dark:text-purple-400 dark:hover:bg-purple-900/20 border border-transparent',
       link:
-        'text-primary hover:text-primary-dark focus:outline-none focus:underline dark:text-primary dark:hover:text-primary-dark border border-transparent shadow-none px-0 py-0',
+        'text-purple-500 hover:text-purple-600 focus:outline-none focus:underline dark:text-purple-400 dark:hover:text-purple-300 border border-transparent shadow-none px-0 py-0',
     };
 
+    // Size styles based on 8pt grid system from spacing guide
     const sizeStyles = {
-      sm: 'px-3 py-1.5 text-sm',
-      md: 'px-4 py-2 text-base',
-      lg: 'px-6 py-3 text-lg',
-      icon: 'p-2',
+      sm: 'px-3 py-1.5 text-sm', // Horizontal: 12px, Vertical: 6px
+      md: 'px-4 py-2 text-base',  // Horizontal: 16px, Vertical: 8px
+      lg: 'px-6 py-3 text-lg',    // Horizontal: 24px, Vertical: 12px
+      icon: 'p-2',                // All sides: 8px
     };
 
     const iconSize = {
@@ -89,6 +96,7 @@ const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPro
       )
     );
 
+    // Consistent icon spacing following the spacing guide
     const content = (
       <>
         {leftIcon && React.cloneElement(leftIcon, { className: twMerge(clsx("inline-block", iconSize[size], rightIcon ? 'mr-2' : '')) })}

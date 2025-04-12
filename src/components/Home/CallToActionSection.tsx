@@ -1,36 +1,35 @@
 import React from 'react';
-import Button from '../Common/Button'; 
+import Button from '../Common/Button';
 
 const CallToActionSection = () => (
-  // Full-width gradient background with contained content
-  <div className="bg-gradient-to-br from-teal-700 to-teal-900 text-white py-16 md:py-20 text-center relative overflow-hidden">
-    {/* Decorative background elements */}
+  <div className="bg-primary-dark text-white py-16 md:py-24 relative overflow-hidden">
+    {/* Subtle professional background pattern */}
     <div className="absolute inset-0 opacity-10">
-      <div className="absolute top-0 left-1/4 w-24 h-24 rounded-full bg-secondary"></div>
-      <div className="absolute bottom-0 right-1/4 w-32 h-32 rounded-full bg-secondary"></div>
-      <div className="absolute top-1/3 right-1/3 w-16 h-16 rounded-full bg-white"></div>
+      <div className="absolute top-10 left-1/4 w-64 h-64 rounded-full bg-primary-light opacity-20 blur-xl"></div>
+      <div className="absolute bottom-10 right-1/4 w-48 h-48 rounded-full bg-secondary opacity-20 blur-xl"></div>
     </div>
 
-    {/* Center content within the container */}
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10"> {/* Added consistent horizontal padding */}
-      {/* Heading - Use standard text/font utilities */}
-      <h2 className="text-3xl md:text-4xl font-bold mb-6">
-        Ready to Navigate Your AI Journey with <span className="text-secondary">Expert Guidance</span>?
-      </h2>
-      {/* Paragraph */}
-      <p className="text-lg mb-8">
-        Schedule a consultation to explore how our strategic advisory, implementation guidance, and workforce training can accelerate your AI initiatives and deliver measurable business value.
-      </p>
-      {/* Button - Use Button component */}
-      {/* Inferring a contrasting style - secondary or custom? Let's try secondary with overrides */}
-      <Button 
-        href="/contact" 
-        variant="secondary" 
-        size="lg"
-        className="shadow-md hover:shadow-lg transition-shadow"
-      >
-        Schedule Your Strategy Session
-      </Button>
+    {/* Content container with proper width constraints */}
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="text-center">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-heading font-semibold mb-6 text-white leading-tight">
+          Ready to Transform Education with{' '}
+          <span className="text-secondary-light font-semibold">Innovative Learning</span>
+        </h2>
+        
+        <p className="text-lg mb-10 text-white/90 max-w-3xl mx-auto font-sans leading-relaxed">
+          Schedule a consultation to explore how our educational technology expertise, transformation strategies, and evidence-based approaches can enhance learning experiences and deliver measurable educational outcomes.
+        </p>
+        
+        <Button 
+          href="/contact" 
+          variant="secondary" 
+          size="lg"
+          className="font-medium shadow-md hover:shadow-lg transition-all duration-300"
+        >
+          Schedule Your Consultation
+        </Button>
+      </div>
     </div>
   </div>
 );

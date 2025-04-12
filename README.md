@@ -1,4 +1,17 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Bthecause - Educational Transformation Platform
+
+A Next.js-based platform enabling educational transformation through collaborative AI tools and intelligent content systems that foster deep understanding, critical inquiry, and holistic personal development.
+
+## Vision
+
+Bthecause aims to catalyze a global shift towards a more effective, resilient, equitable, and humanistic educational paradigm that empowers individuals to thrive with purpose, critical thinking, and adaptability in collaboration with AI.
+
+## Technologies
+
+- **Frontend**: Next.js, React, TypeScript, Tailwind CSS
+- **AI Integration**: Genesis Engine Platform with Knowledge Core (Neo4j), Scalable Runtime (Orleans), AI Orchestrator (SK), and Connectivity Hub (MCP)
+- **UI Components**: Shadcn UI library with custom theming
+- **Deployment**: Vercel/Netlify
 
 ## Getting Started
 
@@ -18,19 +31,22 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load custom fonts.
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+To learn more about the technologies used:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Next.js Documentation](https://nextjs.org/docs) - Next.js features and API
+- [Tailwind CSS](https://tailwindcss.com/docs) - Utility-first CSS framework
+- [TypeScript](https://www.typescriptlang.org/docs/) - Typed JavaScript
+- [Shadcn UI](https://ui.shadcn.com/) - Re-usable components built with Radix UI and Tailwind CSS
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Brand Identity
 
-## Deploy on Vercel
+Bthecause's brand identity is built around three core archetypes:
+- **The Magician**: Transformation, Vision, Empowerment, Possibility
+- **The Sage**: Wisdom, Understanding, Truth, Inquiry, Clarity
+- **The Creator**: Innovation, Creation, Building, Future-Forward
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Our color palette reflects these archetypes with rich purple (transformation), vibrant turquoise (innovation), and warm amber (human connection) to create a distinct and purposeful visual identity.

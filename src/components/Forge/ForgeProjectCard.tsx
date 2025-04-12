@@ -2,7 +2,7 @@
 import React from 'react';
 import Image from 'next/image';
 import NextLink from 'next/link';
-import BaseCard from '../Common/BaseCard';
+import EducationalCard from '../Common/EducationalCard';
 import Button from '../Common/Button';
 import JdenticonIcon from '../Common/JdenticonIcon';
 import Heading from '../Common/Heading';
@@ -15,6 +15,11 @@ interface ForgeProjectCardProps {
   project: ForgeProjectData;
 }
 
+/**
+ * ForgeProjectCard component following Bthecause spacing guide.
+ * Displays educational tools and projects with consistent spacing
+ * based on the 8pt grid system.
+ */
 const ForgeProjectCard: React.FC<ForgeProjectCardProps> = ({ project }) => {
   const { 
     id, 
@@ -52,43 +57,48 @@ const ForgeProjectCard: React.FC<ForgeProjectCardProps> = ({ project }) => {
   };
 
   return (
-    <BaseCard key={id} className="flex flex-col h-full shadow-sm"> 
-      {/* Inner wrapper for consistent padding */} 
-      <div className="p-4 flex-grow flex flex-col"> 
-        {/* Image */} 
-        {image ? (
-          <div className="w-full mb-3 rounded-lg overflow-hidden bg-teal-900 aspect-[4/3] flex items-center justify-center"> 
-            <Image
-              src={image}
-              alt={`${title} preview`}
-              width={320}
-              height={180}
-              className="w-full h-auto object-cover"
-            />
-          </div>
-        ) : (
-          <div className="w-full aspect-[4/3] mb-3 bg-teal-900 dark:bg-teal-800 rounded-lg flex items-center justify-center"> 
-            <JdenticonIcon value={title} size={40} />
-          </div>
-        )}
+    <EducationalCard 
+      key={id} 
+      className="h-full"
+      padding="md"
+      variant="primary"
+    > 
+      {/* Image with consistent aspect ratio following 8pt grid */}
+      {image ? (
+        <div className="w-full mb-4 rounded-lg overflow-hidden bg-purple-100 dark:bg-purple-900/30 aspect-[4/3] flex items-center justify-center"> 
+          <Image
+            src={image}
+            alt={`${title} preview`}
+            width={320}
+            height={180}
+            className="w-full h-auto object-cover"
+          />
+        </div>
+      ) : (
+        <div className="w-full aspect-[4/3] mb-4 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center"> 
+          <JdenticonIcon value={title} size={40} />
+        </div>
+      )}
 
-        {/* Title */} 
-        <Heading level={4} className="mb-2 text-base font-semibold text-gray-900 dark:text-gray-50"> 
+      {/* Content with consistent spacing following 8pt grid */}
+      <div className="flex flex-col flex-grow gap-4">
+        {/* Title */}
+        <Heading level={4} className="font-semibold text-lg text-neutral-900 dark:text-neutral-50">
           {title}
         </Heading>
 
-        {/* Description */} 
-        <Paragraph variant="body2" className="text-gray-600 dark:text-gray-300 mb-3 flex-grow text-sm"> 
+        {/* Description */}
+        <Paragraph variant="body2" className="text-neutral-700 dark:text-neutral-300 flex-grow text-sm">
           {content}
         </Paragraph>
 
-        {/* Tags */} 
+        {/* Tags with proper spacing */}
         {tags && tags.length > 0 && (
-          <div className="mb-3 flex flex-wrap gap-1.5"> 
+          <div className="flex flex-wrap gap-2">
             {tags.map((tag) => (
               <span
                 key={tag}
-                className="px-2 py-0.5 bg-teal-50 text-teal-700 text-xs font-medium rounded-md dark:bg-teal-900/30 dark:text-teal-300"
+                className="px-2 py-0.5 bg-purple-50 text-purple-700 text-xs font-medium rounded-md dark:bg-purple-900/30 dark:text-purple-300"
               >
                 {tag}
               </span>
@@ -96,21 +106,21 @@ const ForgeProjectCard: React.FC<ForgeProjectCardProps> = ({ project }) => {
           </div>
         )}
         
-        {/* Status Badge */} 
+        {/* Status Badge */}
         {status && !isComingSoon && (
-            <div className="mb-2"> 
-              <span className={`inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium ${ 
-                isComingSoon 
-                  ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300' 
-                  : 'bg-muted text-muted-foreground dark:bg-muted-dark dark:text-muted-foreground-dark'
-              }`}>
-                {status}
-              </span>
-            </div>
+          <div>
+            <span className={`inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium ${ 
+              isComingSoon 
+                ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300' 
+                : 'bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300'
+            }`}>
+              {status}
+            </span>
+          </div>
         )}
         
-        {/* Buttons */} 
-        <div className="mt-auto pt-2 border-t border-gray-100 dark:border-gray-700 flex flex-wrap gap-2"> 
+        {/* Buttons */}
+        <div className="mt-auto pt-4 border-t border-purple-100 dark:border-purple-900/30 flex flex-wrap gap-2">
           {githubUrl && (
             <Button 
               href={githubUrl} 
@@ -118,8 +128,7 @@ const ForgeProjectCard: React.FC<ForgeProjectCardProps> = ({ project }) => {
               size="sm" 
               leftIcon={<FaGithub />} 
               target="_blank" 
-              rel="noopener noreferrer" 
-              className="mt-2 text-sm py-1"
+              rel="noopener noreferrer"
               onClick={handleGitHubClick}
             >
               GitHub
@@ -133,16 +142,15 @@ const ForgeProjectCard: React.FC<ForgeProjectCardProps> = ({ project }) => {
               leftIcon={<FaArrowUpRightFromSquare />} 
               target={isInternalLink ? "_self" : "_blank"}
               rel={isInternalLink ? "" : "noopener noreferrer"}
-              disabled={isComingSoon} 
-              className="mt-2 text-sm py-1"
+              disabled={isComingSoon}
               onClick={!isComingSoon ? handleTryClick : undefined}
             >
               {isComingSoon ? 'Coming Soon' : 'Try It'}
             </Button>
           )}
         </div>
-      </div> 
-    </BaseCard>
+      </div>
+    </EducationalCard>
   );
 };
 

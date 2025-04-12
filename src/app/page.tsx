@@ -8,13 +8,12 @@ import ServicesSection from '../components/Home/ServicesSection';
 import AboutSection from '../components/Home/AboutSection';
 import TestimonialsSection from '../components/Home/TestimonialsSection';
 import BlogSnippetsSection from '../components/Home/BlogSnippetsSection';
-import ForgeSection from '../components/Home/ForgeSection';
+import HomeLearningLabSection from '../components/Home/HomeLearningLabSection';
 import CallToActionSection from '../components/Home/CallToActionSection';
 
 // Import data fetching functions and types
 import { getSortedPostsData } from '@/lib/posts';
 import { getSortedServicesData } from '@/lib/services';
-import { getAllForgeProjects, ForgeProjectData } from '@/lib/forgeUtils';
 import { PostData } from '@/types/post';
 import { ServiceData } from '@/types/service';
 
@@ -30,9 +29,6 @@ export default async function HomePage() {
   const allServices: ServiceData[] = await getSortedServicesData(); 
   const displayServices = allServices.slice(0, 3);
 
-  // Fetch all forge projects
-  const allForgeProjects: ForgeProjectData[] = getAllForgeProjects();
-
   return (
     <main>
       <HeroSection />
@@ -45,6 +41,10 @@ export default async function HomePage() {
         <ServicesSection services={displayServices} />
       </SectionContainer>
 
+      <SectionContainer id="lab" className="bg-white dark:bg-neutral-950 py-16">
+        <HomeLearningLabSection />
+      </SectionContainer>
+
       <div className="bg-muted dark:bg-muted-dark">
         <SectionContainer id="testimonials">
           <TestimonialsSection />
@@ -53,10 +53,6 @@ export default async function HomePage() {
 
       <SectionContainer id="insights" className="bg-neutral-100 dark:bg-neutral-900">
         <BlogSnippetsSection blogSnippets={latestPosts} />
-      </SectionContainer>
-
-      <SectionContainer id="forge">
-        <ForgeSection projects={allForgeProjects} />
       </SectionContainer>
 
       {/* CTA section needs to be full-width */}

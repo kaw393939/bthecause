@@ -39,12 +39,12 @@ export interface NodeDetailPanelProps {
   /**
    * All nodes for connection lookup
    */
-  allNodes: GraphNode[];
+  allNodes?: GraphNode[];
   
   /**
    * All links for connection lookup
    */
-  links: GraphLink[];
+  links?: GraphLink[];
   
   /**
    * Top score for normalization
@@ -52,14 +52,13 @@ export interface NodeDetailPanelProps {
   topScore?: number;
   
   /**
-   * Optional theme colors
+   * Theme colors for styling
    */
   themeColors?: {
     primary: string;
     secondary: string;
-    muted: string;
-    lightMuted: string;
     background: string;
+    muted: string;
   };
 }
 
@@ -83,28 +82,71 @@ export function NodeDetailPanel({
 }: NodeDetailPanelProps) {
   interface Connection {
     node: GraphNode;
-    type: string;
+    direction?: 'influenced' | 'influencedBy';
+    relationship?: string;
+    type?: string;
   }
 
   const connections: Connection[] = React.useMemo(() => {
     // Guard against missing data
-    if (!node || links.length === 0 || allNodes.length === 0) {
+    if (!node || !links || !allNodes || links.length === 0 || allNodes.length === 0) {
       console.log("Node, links, or allNodes not available for connections calculation.");
       return [];
     }
     
-    const relatedLinks = links
-      .filter(link => link.source === node.id || link.target === node.id)
-
-    const connectionData = relatedLinks.map(link => {
-        const connectedNodeId = link.source === node.id ? link.target : link.source;
-        const connectedNode = allNodes.find(n => n.id === connectedNodeId);
-        return { node: connectedNode, type: link.relation ?? link.type ?? 'unknown' }; // Check for relation first, then type, then use unknown as fallback
-      })
-      .filter((conn): conn is Connection => conn.node !== undefined); // Type guard to filter out undefined nodes
-
-    // console.log("Calculated Connections:", connectionData);
-    return connectionData;
+    const sourceLinksMap: Record<string, GraphLink[]> = {};
+    const targetLinksMap: Record<string, GraphLink[]> = {};
+    
+    // Build maps for source and target lookup
+    links.forEach((link) => {
+      const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
+      const targetId = typeof link.target === 'object' ? link.target.id : link.target;
+      
+      if (!sourceLinksMap[sourceId]) sourceLinksMap[sourceId] = [];
+      if (!targetLinksMap[targetId]) targetLinksMap[targetId] = [];
+      
+      sourceLinksMap[sourceId].push(link);
+      targetLinksMap[targetId].push(link);
+    });
+    
+    // Find directly connected nodes
+    const connected: Connection[] = [];
+    
+    // Find nodes the current node influences (outgoing links)
+    // sourceId === node.id
+    if (sourceLinksMap[node.id]) {
+      sourceLinksMap[node.id].forEach((link) => {
+        const targetId = typeof link.target === 'object' ? link.target.id : link.target;
+        const targetNode = allNodes.find((n) => n.id === targetId);
+        
+        if (targetNode) {
+          connected.push({
+            node: targetNode,
+            direction: 'influenced',
+            relationship: typeof link.type === 'string' ? link.type : 'influenced',
+          });
+        }
+      });
+    }
+    
+    // Find nodes that influence the current node (incoming links)
+    // targetId === node.id
+    if (targetLinksMap[node.id]) {
+      targetLinksMap[node.id].forEach((link) => {
+        const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
+        const sourceNode = allNodes.find((n) => n.id === sourceId);
+        
+        if (sourceNode) {
+          connected.push({
+            node: sourceNode,
+            direction: 'influencedBy',
+            relationship: typeof link.type === 'string' ? link.type : 'influenced by',
+          });
+        }
+      });
+    }
+    
+    return connected;
   }, [node, links, allNodes]);
 
   const influenceProgress = node?.influenceScore !== undefined 
@@ -269,7 +311,7 @@ export function NodeDetailPanel({
                   className="px-2 py-1 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
                 >
                   <span className="font-medium">{conn.node.name}</span> 
-                  <span className="text-xs text-gray-500 dark:text-gray-400 ml-1">({conn.type})</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400 ml-1">({conn.relationship})</span>
                 </li>
               ))}
             </ul>

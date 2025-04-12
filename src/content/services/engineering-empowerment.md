@@ -1,24 +1,24 @@
 ---
-title: 'Engineering Empowerment'
-excerpt: 'Transform your development team with AI tools that amplify productivity, eliminate technical debt, and accelerate feature delivery.'
+title: 'Educational Technology Empowerment'
+excerpt: 'Transform your educational content with AI tools that amplify learning effectiveness, eliminate curriculum gaps, and accelerate student comprehension.'
 image: '/images/services/aiengineer.png'
 icon: 'Code'
 order: 1
 ---
 
-## Elevate Your Enterprise Engineering Team
+## Elevate Your Educational Technology Capabilities
 
-For large enterprises navigating complex AI integration, your engineering teams need more than theoretical guidance—they need expertise from someone who has worked directly with these systems. With early adoption experience using generative AI systems for practical implementation challenges, I bring hands-on knowledge that many consultants simply don't possess.
+For educational institutions navigating complex AI integration, your curriculum and instructional technology teams need more than theoretical guidance—they need expertise from someone who has worked directly with these systems in educational contexts. With early adoption experience using generative AI systems for practical educational challenges, we bring hands-on knowledge that many educational consultants simply don't possess.
 
-Our enterprise-focused approach includes:
+Our education-focused approach includes:
 
-*   **Engineering Workflow Enhancement:** Implementing enterprise-grade AI coding assistants and testing frameworks that scale across development teams—based on real-world applications built to address complex organizational challenges.
-*   **Technical Debt Reduction at Scale:** Applying AI-assisted refactoring methodologies designed for legacy systems, leveraging techniques informed by both enterprise consulting perspectives and startup investment evaluation experience.
-*   **Development Velocity for Competitive Advantage:** Accelerating your development lifecycle with AI pair programming practices refined through technology startup experience, where rapid innovation is essential for market positioning.
-*   **Enterprise Talent Strategy:** Creating frameworks that position AI tools within your existing talent ecosystem, informed by a holistic perspective that combines engineering leadership, product design expertise, and educational experience.
+*   **Educational Content Enhancement:** Implementing education-grade AI content assistants and assessment frameworks that scale across learning environments—based on real-world applications built to address complex pedagogical challenges.
+*   **Curriculum Gap Reduction:** Applying AI-assisted content development methodologies designed for existing educational materials, leveraging techniques informed by both educational research and cognitive science perspectives.
+*   **Learning Velocity for Student Success:** Accelerating your students' learning progression with AI-assisted educational practices refined through educational technology experience, where effective learning is essential for student outcomes.
+*   **Educational Talent Development:** Creating frameworks that position AI tools within your existing educational ecosystem, informed by a holistic perspective that combines instructional leadership, learning design expertise, and educational research experience.
 
-Our approach is fundamentally different from typical enterprise consulting firms. Having experience in both technology startups and investment evaluation, I understand the technical, cultural, and business challenges of AI integration from multiple perspectives. This approach ensures your organization implements solutions that work within your specific enterprise constraints while delivering measurable business outcomes.
+Our approach is fundamentally different from typical educational technology consultants. Having experience in both educational innovation and learning science research, we understand the pedagogical, cultural, and institutional challenges of AI integration from multiple perspectives. This approach ensures your institution implements solutions that work within your specific educational constraints while delivering measurable learning outcomes.
 
-We measure success through enterprise-relevant metrics: reduced cycle time for development teams, accelerated feature deployment in product suites, technical debt reduction in critical systems, and improved engineer retention in competitive talent markets.
+We measure success through education-relevant metrics: improved student engagement, accelerated concept mastery, reduction in achievement gaps in critical subjects, and enhanced educator satisfaction in challenging teaching environments.
 
-Let us help your engineering organization leverage AI as a strategic competitive advantage rather than just another technology initiative.
+Let us help your educational institution leverage AI as a strategic pedagogical advantage rather than just another technology initiative.

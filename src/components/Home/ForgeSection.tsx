@@ -34,21 +34,21 @@ const ForgeSection: React.FC<ForgeSectionProps> = ({ projects }) => {
   return (
     <div>
       <SectionHeading className="md:text-5xl mb-2">
-        From the Forge
+        The Genesis Engine
       </SectionHeading>
       <Paragraph 
         variant="body1" 
         className="mt-4 mb-6 leading-7 text-gray-600 dark:text-gray-300 text-center max-w-3xl mx-auto"
       >
-        Welcome to the Forge, our experimental playground. Here, we showcase innovative proof-of-concept projects demonstrating the potential of emerging AI technologies like <span className="text-secondary font-medium">Knowledge Graphs</span>, <span className="text-secondary font-medium">Multi-Agent Systems</span>, <span className="text-secondary font-medium">RAG</span>, and advanced character agents.
+        Explore the Genesis Engine, our educational innovation laboratory. Here, we showcase transformative learning technologies demonstrating the potential of AI in education through <span className="text-turquoise-500 font-medium">Educational Knowledge Graphs</span>, <span className="text-turquoise-500 font-medium">AI Orchestration</span>, <span className="text-turquoise-500 font-medium">Personalized Learning</span>, and engaging educational characters.
       </Paragraph>
       
       <div className="flex justify-center mb-10">
-        <span className="inline-flex items-center px-3 py-1 rounded-md text-sm font-medium bg-teal-50 text-teal-700 dark:bg-teal-900/30 dark:text-teal-300">
+        <span className="inline-flex items-center px-3 py-1 rounded-md text-sm font-medium bg-purple-50 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 mr-1.5">
             <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
           </svg>
-          Outlaw Innovation
+          Educational Innovation
         </span>
       </div>
 
@@ -60,7 +60,7 @@ const ForgeSection: React.FC<ForgeSectionProps> = ({ projects }) => {
 
       {allProjects.length > 3 && (
         <div className="mt-12 text-center">
-          <Button href="/forge" variant="secondary" size="lg" className="shadow-sm">
+          <Button href="/forge" variant="primary" size="lg" className="shadow-sm">
             Explore All Projects
           </Button>
         </div>

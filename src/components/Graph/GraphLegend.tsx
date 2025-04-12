@@ -33,107 +33,123 @@ const eraInfo = {
 };
 
 interface GraphLegendProps {
-  availableEras: string[];
-  activeEras: string[];
-  onToggleEra: (era: string) => void;
+  availableEras?: string[];
+  activeEras?: string[];
+  onToggleEra?: (era: string) => void;
   className?: string; // Allow passing additional classes
+  eras?: string[];
+  getNodeColor?: (era: string | undefined) => string;
 }
 
 const GraphLegend: React.FC<GraphLegendProps> = ({
-  availableEras,
-  activeEras,
+  availableEras = [],
+  activeEras = [],
   onToggleEra,
   className, // Destructure className
+  eras = [],
+  getNodeColor,
 }) => {
   const linkOpacity = 0.6; // Consistent opacity for legend lines
 
+  // Use actual eras if passed via new prop structure
+  const displayEras = eras.length > 0 ? eras : availableEras;
+
+  // Helper to determine if an era is active (for backward compatibility)
+  const isEraActive = (era: string) => {
+    return activeEras.length === 0 || activeEras.includes(era);
+  };
+
+  // Get color for an era - use new function if provided
+  const getEraColor = (era: string) => {
+    if (getNodeColor) {
+      return getNodeColor(era);
+    }
+    
+    // Original color logic as fallback
+    return `hsl(${Math.floor(getHueFromString(era) * 360)}, 70%, 45%)`;
+  };
+
   // Use hex codes matching EnterprisePhilosopherGraph
   const nodeStates = [
-    { name: 'Selected', color: '#B8860B', type: 'node' }, // secondary.main
-    { name: 'Hovered', color: '#bdbdbd', type: 'node' }, // Grey 400 approximation
-  ];
-
-  const relationshipTypes = [
-    { name: 'Influenced by', color: addAlpha('#81c784', linkOpacity), type: 'link' }, // success.light
-    { name: 'Student of', color: addAlpha('#64b5f6', linkOpacity), type: 'link' }, // info.light
-    { name: 'Intellectual Partner', color: addAlpha('#ffb74d', linkOpacity), type: 'link' }, // warning.light
-    { name: 'Other', color: addAlpha('#9e9e9e', linkOpacity * 0.8), type: 'link' }, // grey[500]
+    { label: 'Regular Node', color: '#4B5563', desc: 'Philosopher or thinker node' },
+    { label: 'Hovered/Connected', color: '#2563EB', desc: 'Node being explored or a direct connection' },
+    { label: 'Selected Node', color: '#B8860B', desc: 'Currently selected philosopher' }
   ];
 
   return (
-    <div
-      // Use twMerge to combine base styles with passed className
-      className={twMerge(
-        'p-4 bg-white/90 dark:bg-neutral-800/90 rounded-lg shadow-lg border border-neutral-200 dark:border-neutral-700',
-        className // Apply additional classes
-      )}
-    >
-      <h6 className="text-sm font-semibold mb-2 text-text-primary dark:text-dark-text-primary">Legend</h6>
-
-      <p className="text-xs font-bold mb-1 text-gray-700">Node States</p>
-      {nodeStates.map((state) => (
-        <div key={state.name} className="flex items-center mb-1">
-          <div className="mr-2 flex items-center">
-            <div
-              className="w-3 h-3 rounded-full border border-gray-400"
-              style={{ backgroundColor: state.color }}
-            ></div>
+    <div className={twMerge("p-4 rounded-lg bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700", className)}>
+      <h3 className="text-sm font-medium text-gray-900 dark:text-white mb-3">Graph Legend</h3>
+      
+      <div className="space-y-4">
+        {/* Node States Legend */}
+        <div>
+          <h4 className="text-xs text-gray-500 dark:text-gray-400 mb-2">Node States</h4>
+          <div className="grid grid-cols-1 gap-2">
+            {nodeStates.map((state, i) => (
+              <div key={i} className="flex items-center">
+                <div 
+                  className="w-4 h-4 rounded-full mr-2" 
+                  style={{ backgroundColor: state.color }}
+                ></div>
+                <span className="text-xs text-gray-700 dark:text-gray-300 mr-1 font-medium">{state.label}</span>
+                <span className="text-xs text-gray-500 dark:text-gray-400"> — {state.desc}</span>
+              </div>
+            ))}
           </div>
-          <span className="text-xs text-gray-600">{state.name}</span>
         </div>
-      ))}
-
-      <hr className="my-2 border-gray-200" />
-
-      <p className="text-xs font-bold mb-1 text-gray-700">Relationship Types</p>
-      {relationshipTypes.map((rel) => (
-        <div key={rel.name} className="flex items-center mb-1">
-          <div className="mr-2 flex items-center">
-            <div
-              className="w-4 h-1"
-              style={{ backgroundColor: rel.color }}
-            ></div>
-          </div>
-          <span className="text-xs text-gray-600">{rel.name}</span>
-        </div>
-      ))}
-
-      {/* Era Filters - Only show if availableEras has items */}
-      {availableEras.length > 0 && (
-        <>
-          <hr className="my-2 border-border-light dark:border-border-dark" />
-          <p className="text-xs font-bold mb-1 text-text-secondary dark:text-dark-text-secondary">Filter by Era</p>
-          <div className="flex flex-wrap gap-2">
-            {availableEras
-              // Sort chronologically based on predefined order
+        
+        {/* Eras Legend */}
+        <div>
+          <h4 className="text-xs text-gray-500 dark:text-gray-400 mb-2">Philosophical Eras</h4>
+          <div className="grid grid-cols-1 gap-1">
+            {displayEras
               .sort((a, b) => {
-                const orderA = eraInfo[a as keyof typeof eraInfo]?.order || 999;
-                const orderB = eraInfo[b as keyof typeof eraInfo]?.order || 999;
+                // Sort by defined order in eraInfo if available
+                const orderA = a in eraInfo ? eraInfo[a as keyof typeof eraInfo].order : 99;
+                const orderB = b in eraInfo ? eraInfo[b as keyof typeof eraInfo].order : 99;
                 return orderA - orderB;
               })
               .map((era) => {
-                const isActive = activeEras.includes(era);
-                const eraDesc = eraInfo[era as keyof typeof eraInfo]?.desc || '';
-
+                const eraColor = getEraColor(era);
+                const isActive = isEraActive(era);
+                const eraDisplay = era in eraInfo ? 
+                  `${era} (${eraInfo[era as keyof typeof eraInfo].desc})` : 
+                  era;
+                
                 return (
-                  <button
-                    key={era}
-                    onClick={() => onToggleEra(era)}
-                    className={`
-                      px-3 py-1 rounded-full text-xs font-medium transition-all duration-150 
-                      ${isActive 
-                        ? 'bg-primary text-white border border-primary-dark shadow-sm' 
-                        : 'bg-white text-gray-600 border border-gray-300 hover:border-primary/50 hover:text-primary'}
-                    `}
-                    title={eraDesc ? `${era}: ${eraDesc}` : `Toggle ${era} filter`}
+                  <div 
+                    key={era} 
+                    className={`flex items-center ${onToggleEra ? 'cursor-pointer' : ''} ${!isActive ? 'opacity-50' : ''}`} 
+                    onClick={() => onToggleEra && onToggleEra(era)}
                   >
-                    {era}
-                  </button>
+                    <div 
+                      className="w-4 h-4 rounded-full mr-2" 
+                      style={{ backgroundColor: eraColor }}
+                    ></div>
+                    <span className="text-xs text-gray-700 dark:text-gray-300">
+                      {eraDisplay}
+                    </span>
+                  </div>
                 );
               })}
           </div>
-        </>
-      )}
+        </div>
+        
+        {/* Connection Types */}
+        <div>
+          <h4 className="text-xs text-gray-500 dark:text-gray-400 mb-2">Connection Types</h4>
+          <div className="grid grid-cols-1 gap-2">
+            <div className="flex items-center">
+              <div className="w-8 h-0.5 bg-gray-400 dark:bg-gray-500 mr-2"></div>
+              <span className="text-xs text-gray-700 dark:text-gray-300">Influenced by / Studied with</span>
+            </div>
+            <div className="flex items-center">
+              <div className="w-8 h-0.5 bg-blue-500 dark:bg-blue-400 mr-2"></div>
+              <span className="text-xs text-gray-700 dark:text-gray-300">Highlighted connection</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

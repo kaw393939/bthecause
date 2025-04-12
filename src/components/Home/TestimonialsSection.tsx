@@ -27,49 +27,50 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ maxItems }) =
   }
 
   return (
-    <div>
-      <SectionHeading align="center" className="md:text-5xl mb-12">
-        What Our Clients Say
+    <div className="py-16">
+      <SectionHeading align="center" className="md:text-5xl mb-12 font-heading font-semibold text-neutral-900 dark:text-white">
+        What Our Partners Say
       </SectionHeading>
       
       <div className="max-w-3xl mx-auto text-center mb-10">
-        <p className="text-gray-600 dark:text-gray-300">
-          Enterprise leaders trust TheoForge to guide their <span className="text-secondary font-medium">AI transformation journey</span>
+        <p className="text-neutral-800 dark:text-neutral-200 text-lg">
+          Educational leaders trust our organization to guide their 
+          <span className="text-primary font-medium"> educational transformation journey</span>
         </p>
       </div>
 
-      <Carousel 
+      <Carousel
         opts={{
           align: "center",
-          loop: testimonialsToDisplay.length > 3, // Only loop if more items than visible
+          loop: true,
         }}
-        className="w-full max-w-[1200px] mx-auto"
+        className="mx-auto max-w-5xl"
       >
-        <CarouselContent className="-ml-4 flex justify-center"> 
+        <CarouselContent>
           {testimonialsToDisplay.map((testimonial) => (
-            // Set responsive basis: 1 on mobile, 2 on md, 3 on lg
-            <CarouselItem key={testimonial.id} className="basis-full md:basis-1/2 lg:basis-1/3 pl-4 pb-6 max-w-[350px]"> 
-              <div className="h-full"> {/* Ensure card stretches */} 
-                <TestimonialCard testimonial={testimonial} />
-              </div>
+            <CarouselItem key={testimonial.id} className="basis-full sm:basis-1/2 lg:basis-1/3 p-2">
+              <TestimonialCard testimonial={testimonial} />
             </CarouselItem>
           ))}
         </CarouselContent>
-        {/* Conditionally show controls if looping is possible */} 
-        {testimonialsToDisplay.length > 3 && (
-          <>
-            <CarouselPrevious className="hidden sm:flex" /> 
-            <CarouselNext className="hidden sm:flex" />
-          </>
-        )}
+        
+        <div className="flex justify-center gap-2 mt-8">
+          <CarouselPrevious className="relative inset-0 translate-y-0" />
+          <CarouselNext className="relative inset-0 translate-y-0" />
+        </div>
       </Carousel>
-      
+
       {maxItems && allTestimonials.length > maxItems && (
-          <div className="mt-10 text-center">
-              <Button href="/testimonials" variant="secondary" size="md" className="shadow-sm">
-                  View All Testimonials
-              </Button>
-          </div>
+        <div className="mt-12 text-center">
+          <Button 
+            href="/testimonials" 
+            variant="primary"
+            size="lg"
+            className="shadow-md font-medium"
+          >
+            View All Testimonials
+          </Button>
+        </div>
       )}
     </div>
   );

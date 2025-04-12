@@ -22,20 +22,60 @@ module.exports = {
     extend: {
       fontSize: { 
         xs: ['0.75rem', '1.5'],    // 12px / 18px
-        sm: ['0.875rem', '1.7'],   // 14px / 24px
-        base: ['1rem', '1.7'],       // 16px / 27px - Crucial: 1.7 line-height
-        lg: ['1.125rem', '1.7'],   // 18px / 30px
-        xl: ['1.25rem', '1.6'],    // 20px / 32px
-        '2xl': ['1.5rem', '1.6'],    // 24px / 38px
-        '3xl': ['1.875rem', '1.5'],  // 30px / 45px
-        '4xl': ['2.25rem', '1.4'],   // 36px / 50px
-        '5xl': ['3rem', '1.3'],      // 48px / 62px
-        '6xl': ['3.75rem', '1.2'],   // 60px / 72px
+        sm: ['0.875rem', '1.6'],   // 14px / 22px
+        base: ['1rem', '1.7'],     // 16px / 27px - Crucial: 1.7 line-height for educational content
+        lg: ['1.125rem', '1.5'],   // 18px / 27px
+        xl: ['1.25rem', '1.4'],    // 20px / 28px
+        '2xl': ['1.5rem', '1.3'],  // 24px / 31px
+        '3xl': ['2rem', '1.25'],   // 32px / 40px
+        '4xl': ['2.5rem', '1.2'],  // 40px / 48px
+        '5xl': ['3rem', '1.2'],    // 48px / 58px
+        '6xl': ['3.75rem', '1.1'], // 60px / 66px
       },
       spacing: {
         // Keep default spacing scale, rely on consistent application
       },
       colors: {
+        // Custom colors defined in Bthecause color guide
+        // Primary: Rich Purple/Indigo - Transformation, vision, possibility
+        purple: {
+          50: '#EDE9FA',  // Primary Lightest
+          100: '#DCD4F5',
+          200: '#BAA9EB',
+          300: '#977FE1',
+          400: '#7857E5',  // Primary Light
+          500: '#5D3FD3',  // Primary Default
+          600: '#4A32A8',  // Primary Dark
+          700: '#3B289F',
+          800: '#2C1E77',
+          900: '#1D144F',
+        },
+        // Secondary: Vibrant Teal/Turquoise - Innovation, creation, building
+        turquoise: {
+          50: '#E0F7FA',
+          100: '#B2EBF2',
+          200: '#80DEEA',
+          300: '#4DD0E1',
+          400: '#2BC4DB',  // Secondary Light
+          500: '#0CB4CE',  // Secondary Default
+          600: '#0A98AE',  // Secondary Dark
+          700: '#00838F',
+          800: '#006064',
+          900: '#004D40',
+        },
+        // Accent: Warm Amber - Human element, attention direction, warmth
+        amber: {
+          50: '#FFF8E1',
+          100: '#FFECB3',
+          200: '#FFE082',
+          300: '#FFD54F',
+          400: '#FBBF24',  // Accent Light
+          500: '#F59E0B',  // Accent Default
+          600: '#D97706',  // Accent Dark
+          700: '#B45309',
+          800: '#92400E',
+          900: '#78350F',
+        },
         // Use CSS variables defined in globals.css for theme colors
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
@@ -45,25 +85,25 @@ module.exports = {
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
-          dark: 'hsl(var(--primary-dark))', // Added for hover/focus
+          dark: 'hsl(var(--primary-dark))', 
         },
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
           foreground: 'hsl(var(--secondary-foreground))',
-          dark: 'hsl(var(--secondary-dark))', // Added for hover/focus
+          dark: 'hsl(var(--secondary-dark))', 
         },
         destructive: {
           DEFAULT: 'hsl(var(--destructive))',
           foreground: 'hsl(var(--destructive-foreground))',
         },
         info: {
-          DEFAULT: 'hsl(var(--info))', // Added Feedback Color
+          DEFAULT: 'hsl(var(--info))', 
         },
         success: {
-          DEFAULT: 'hsl(var(--success))', // Added Feedback Color
+          DEFAULT: 'hsl(var(--success))', 
         },
         warning: {
-          DEFAULT: 'hsl(var(--warning))', // Added Feedback Color
+          DEFAULT: 'hsl(var(--warning))', 
         },
         muted: {
           DEFAULT: 'hsl(var(--muted))',
@@ -72,7 +112,7 @@ module.exports = {
         accent: {
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))',
-          dark: 'hsl(var(--accent-dark))', // Added for hover/focus
+          dark: 'hsl(var(--accent-dark))', 
         },
         popover: {
           DEFAULT: 'hsl(var(--popover))',
@@ -89,9 +129,10 @@ module.exports = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        // Use CSS variable names defined in app/layout.tsx (or similar)
-        heading: ['var(--font-inter)', 'sans-serif'],
-        sans: ['var(--font-public-sans)', 'sans-serif'],
+        // Updated font families based on typography guide v2.0
+        heading: ['Montserrat', 'var(--font-montserrat)', ...fontFamily.sans],
+        sans: ['Open Sans', 'var(--font-open-sans)', ...fontFamily.sans],
+        mono: ['Fira Code', 'var(--font-mono)', ...fontFamily.mono],
       },
       keyframes: { 
         "accordion-down": {
@@ -122,5 +163,3 @@ module.exports = {
   },
   plugins: [require("tailwindcss-animate")], 
 }
-
-// Removed the corePlugins section to re-enable Tailwind's Preflight base styles.

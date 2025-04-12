@@ -9,9 +9,9 @@ import Heading from '@/components/Common/Heading';
 import Paragraph from '@/components/Common/Paragraph';
 import Button from '@/components/Common/Button';
 
-// Icons (Placeholders - consider replacing with actual SVGs or an icon library like lucide-react)
+// Icons for sections
 const PlaceholderIcon = ({ char }: { char: string }) => (
-  <div className="mx-auto mb-4 w-16 h-16 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center text-primary dark:text-blue-300 text-3xl font-semibold font-poppins">
+  <div className="mx-auto mb-4 w-16 h-16 bg-purple-500/10 dark:bg-purple-500/20 rounded-full flex items-center justify-center text-purple-500 dark:text-purple-300 text-3xl font-semibold font-poppins">
     {char}
   </div>
 );
@@ -21,173 +21,222 @@ interface AboutClientUIProps {
 }
 
 export const AboutClientUI: React.FC<AboutClientUIProps> = ({ aboutData }) => {
-  // Note: aboutData is ignored in this redesigned version.
-  // Content is hardcoded for a more personal/creative approach.
-
   return (
     <main className="bg-background dark:bg-neutral-950">
       {/* --- Hero Section --- */}
       <SectionContainer className="pt-20 pb-16 text-center">
-        <Image
-          src="/theo_keith.png"
-          alt="Keith Williams - Cartoon Profile"
-          width={240} // Increased size for prominence
-          height={240}
-          className="rounded-full mx-auto mb-8 shadow-lg border-4 border-white dark:border-neutral-800"
-          priority
-        />
         <Heading
           level={1}
-          className="font-poppins font-semibold text-4xl sm:text-5xl mb-4 text-neutral-900 dark:text-neutral-100"
+          className="font-poppins font-semibold text-4xl sm:text-5xl mb-6 text-neutral-900 dark:text-neutral-100"
         >
-          Transform AI Complexity into <span className="text-primary dark:text-primary-light">Strategic Confidence</span>
+          Empowering <span className="text-purple-500 dark:text-purple-400">Your Journey</span>
         </Heading>
-        <Paragraph className="text-xl max-w-3xl mx-auto text-neutral-800 dark:text-neutral-200">
-          TheoForge helps enterprise leaders navigate the AI landscape through integrated expertise in strategy, implementation, and education. We bridge the gap between AI's potential and practical business value.
+        <Paragraph className="text-xl max-w-3xl mx-auto text-neutral-800 dark:text-neutral-200 mb-8">
+          Our solutions are designed to meet people where they are, creating the greatest chance for success in education, employment, and life.
         </Paragraph>
+        <Button 
+          href="/about/learning-lab" 
+          variant="primary" 
+          size="lg"
+          className="shadow-md"
+        >
+          Discover Our Learning Lab
+        </Button>
       </SectionContainer>
 
-      {/* --- Inspired by Theophrastus Section --- */}
+      {/* --- BTC Is All About Solving Real Problems --- */}
       <SectionContainer>
-        <div className="max-w-3xl mx-auto text-center md:text-left"> {/* Center on small, left-align on medium+ */}
-          <Heading level={2} className="text-2xl md:text-3xl font-semibold mb-4 font-poppins text-neutral-900 dark:text-neutral-100">
-            Meet Theophrastus: Our AI Philosophy in Action
+        <div className="max-w-3xl mx-auto text-center md:text-left">
+          <Heading level={2} className="text-2xl md:text-3xl font-semibold mb-6 font-poppins text-center text-neutral-900 dark:text-neutral-100">
+            Bthecause Is All About Solving Real Problems
           </Heading>
-          <Paragraph className="mb-4 text-lg text-neutral-800 dark:text-neutral-200">
-            When you interact with our AI assistant Theophrastus, you're experiencing our philosophy in action. Named after the ancient Greek philosopher who succeeded Aristotle, our Theophrastus embodies the spirit of practical wisdom, keen observation, and clear communication that defines our approach.
-          </Paragraph>
-          <Paragraph className="text-lg text-neutral-800 dark:text-neutral-200 mb-6">
-            Theophrastus isn't just a chatbot—he's a practical demonstration of how we apply our expertise internally. He represents our philosophy of making AI accessible, valuable, and aligned with organizational goals. Through Theophrastus, we showcase our ability to help you implement AI solutions that truly serve your business objectives while maintaining your unique brand identity.
+          <Paragraph className="mb-8 text-lg text-center text-neutral-800 dark:text-neutral-200">
+            Too many young people face a lack of physical and digital equity in education, support, networking, resources, health and wellness services, and skill development. We place youth at the center of our work to address equity and agency head-on.
           </Paragraph>
         </div>
       </SectionContainer>
 
-      {/* --- Genesis Engine Technology --- */}
-      <SectionContainer className="bg-gradient-to-br from-secondary/5 via-background to-primary/5 dark:from-secondary/10 dark:via-background-dark dark:to-primary/10">
+      {/* --- The BTC Platform --- */}
+      <SectionContainer className="bg-gradient-to-br from-purple-500/5 via-background to-blue-500/5 dark:from-purple-500/10 dark:via-background-dark dark:to-blue-500/10">
         <div className="max-w-4xl mx-auto">
-          <Heading level={2} className="text-center text-3xl font-semibold mb-6 font-poppins text-neutral-900 dark:text-neutral-100">
-            The Genesis Engine: Our R&D Initiative
-          </Heading>
+          <div className="text-center mb-12">
+            <Heading level={2} className="text-3xl font-semibold mb-2 font-poppins text-neutral-900 dark:text-neutral-100">
+              Welcome to the Bthecause Platform
+            </Heading>
+          </div>
           
           <div className="grid md:grid-cols-2 gap-10 items-center">
             <div>
-              <Paragraph className="text-lg text-neutral-800 dark:text-neutral-200 mb-4">
-                While our primary focus is on providing strategic advisory services, we're also investing in our own R&D through the Genesis Engine. This internal initiative explores how <span className="text-secondary font-medium">AI personalities can enhance enterprise interactions</span> and create more meaningful experiences.
-              </Paragraph>
+              <Image
+                src="/logo.png"
+                alt="Bthecause Logo"
+                width={240}
+                height={60}
+                className="mb-6"
+                priority
+              />
+              <Heading level={3} className="text-xl font-semibold mb-4 text-purple-600 dark:text-purple-400">
+                Avatar Driven
+              </Heading>
               <Paragraph className="text-lg text-neutral-800 dark:text-neutral-200">
-                The insights we gain from this research directly inform our advisory services, ensuring our recommendations are grounded in practical experience, not just theory. This hands-on approach to AI research exemplifies our commitment to bridging the gap between AI's potential and practical business applications.
+                With real-time avatar interactions and support resources, members are more likely to develop executive function, self-awareness, resilience, relationships, and motivation to become prepared and empowered to take on life's challenges.
               </Paragraph>
+              <Button 
+                href="/contact" 
+                variant="secondary" 
+                className="mt-6"
+              >
+                Contact Us
+              </Button>
             </div>
             
-            <div className="bg-card dark:bg-card-dark p-6 rounded-xl border border-border shadow-md">
-              <h3 className="text-xl font-semibold mb-3 text-primary dark:text-primary-light">Our Services Portfolio:</h3>
-              <ul className="space-y-3">
-                <li className="flex items-start">
-                  <div className="flex-shrink-0 h-6 w-6 rounded-full bg-secondary/10 flex items-center justify-center mr-2">
-                    <span className="text-secondary text-sm">01</span>
-                  </div>
-                  <span className="text-neutral-800 dark:text-neutral-200">Technology Strategy and Leadership</span>
-                </li>
-                <li className="flex items-start">
-                  <div className="flex-shrink-0 h-6 w-6 rounded-full bg-secondary/10 flex items-center justify-center mr-2">
-                    <span className="text-secondary text-sm">02</span>
-                  </div>
-                  <span className="text-neutral-800 dark:text-neutral-200">AI Driven Modernisation Advisory</span>
-                </li>
-                <li className="flex items-start">
-                  <div className="flex-shrink-0 h-6 w-6 rounded-full bg-secondary/10 flex items-center justify-center mr-2">
-                    <span className="text-secondary text-sm">03</span>
-                  </div>
-                  <span className="text-neutral-800 dark:text-neutral-200">Future Ready Workforce Training</span>
-                </li>
-                <li className="flex items-start">
-                  <div className="flex-shrink-0 h-6 w-6 rounded-full bg-secondary/10 flex items-center justify-center mr-2">
-                    <span className="text-secondary text-sm">04</span>
-                  </div>
-                  <span className="text-neutral-800 dark:text-neutral-200">Custom AI Solution Implementation</span>
-                </li>
-              </ul>
+            <div className="bg-white dark:bg-gray-800 p-8 rounded-xl border border-gray-100 dark:border-gray-700 shadow-md">
+              <Heading level={3} className="text-xl font-semibold mb-4 text-purple-600 dark:text-purple-400">
+                Reimagining the Village
+              </Heading>
+              <Paragraph className="text-neutral-800 dark:text-neutral-200 mb-6">
+                Bthecause integrates smart AI technology and curated interpersonal engagements to reimagine or recreate the ecological support systems of family, community, education, wellness, professional networking and positive civic and social engagements to provide the different perspectives, skills, and experiences necessary for mastering resilience, rigor, relationships and voice.
+              </Paragraph>
+              <div className="flex justify-center">
+                <Image
+                  src="/theo_keith.png" // Replace with actual image of 4 friends as a village
+                  alt="4 Friends as a Village"
+                  width={150}
+                  height={150}
+                  className="rounded-md"
+                />
+              </div>
             </div>
           </div>
         </div>
       </SectionContainer>
 
-      {/* --- Core Philosophy Section --- */}
-      <SectionContainer className="bg-muted/30 dark:bg-muted/10">
-        <Heading level={2} className="text-center mb-12 font-poppins font-semibold text-3xl text-neutral-900 dark:text-neutral-100">
-          Our Philosophy: Clarity, Capability, Confidence
-        </Heading>
-        <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
-          {/* Strategy Block */}
-          <div className="text-center">
-            <PlaceholderIcon char="S" />
-            <Heading level={3} className="text-xl font-medium mb-2 text-neutral-900 dark:text-neutral-100">
-              Strategic Clarity
-            </Heading>
-            <Paragraph className="text-neutral-800 dark:text-neutral-200">
-              We help you cut through the AI hype, defining a strategy aligned precisely with your business goals and organizational context. Our focus is on practical applications that drive measurable value.
-            </Paragraph>
-          </div>
-          {/* Engineering Block */}
-          <div className="text-center">
-            <PlaceholderIcon char="E" />
-            <Heading level={3} className="text-xl font-medium mb-2 text-neutral-900 dark:text-neutral-100">
-              Pragmatic Engineering
-            </Heading>
-            <Paragraph className="text-neutral-800 dark:text-neutral-200">
-              We focus on building reliable, high-impact AI solutions—like RAG systems, LLM integrations, and knowledge graphs—that deliver tangible results, not just experimental showcases.
-            </Paragraph>
-          </div>
-          {/* Education Block */}
-          <div className="text-center">
-            <PlaceholderIcon char="Ed" /> 
-            <Heading level={3} className="text-xl font-medium mb-2 text-neutral-900 dark:text-neutral-100">
-              Empowering Education
-            </Heading>
-            <Paragraph className="text-neutral-800 dark:text-neutral-200">
-              We build your team's internal capabilities, providing training in AI fundamentals, prompt engineering, and domain-specific applications so you can confidently own and scale your AI initiatives.
-            </Paragraph>
-          </div>
+      {/* --- Technology + 4 Friends as a Village --- */}
+      <SectionContainer className="bg-white dark:bg-gray-900">
+        <div className="max-w-3xl mx-auto">
+          <Heading level={2} className="text-center text-3xl font-semibold mb-8 font-poppins text-neutral-900 dark:text-neutral-100">
+            Technology + 4 Friends as a Village
+          </Heading>
+          <Paragraph className="text-lg text-neutral-800 dark:text-neutral-200 mb-8">
+            Our unique platform is designed to help young people: slow the pace, provide time to reflect and comprehend, connect and collaborate, and chart a course for their future, be confident in their capacity to overcome the obstacles on their path, and make a difference in the world.
+          </Paragraph>
+          <Paragraph className="text-lg text-neutral-800 dark:text-neutral-200 font-medium">
+            No other youth-facing platform exists in the market to comprehensively empower young people, families and care providers to easily and safely access an array of accountable community resources while reinforcing positive human connections.
+          </Paragraph>
         </div>
       </SectionContainer>
 
-      {/* --- Unique Blend Section --- */}
-      <SectionContainer>
+      {/* --- The BTC Outcome --- */}
+      <SectionContainer className="bg-purple-500/10 dark:bg-purple-500/5">
         <Heading level={2} className="text-center mb-6 font-poppins font-semibold text-3xl text-neutral-900 dark:text-neutral-100">
-          Led by Keith Williams: Engineer, Educator, AI Strategist
+          The Bthecause Outcome
         </Heading>
-        <Paragraph className="max-w-3xl mx-auto text-center text-lg text-neutral-800 dark:text-neutral-200">
-          With <span className="text-foreground dark:text-foreground-dark font-medium">30 years in engineering leadership</span> and <span className="text-foreground dark:text-foreground-dark font-medium">20 years teaching at the university level</span>, Keith brings a unique perspective to AI implementation. His diverse background allows him to translate complex technical concepts into practical business strategies while effectively building your team's capabilities—a rare combination that makes AI accessible and impactful.
+        <Paragraph className="text-center text-xl font-medium max-w-2xl mx-auto mb-12 text-neutral-800 dark:text-neutral-200">
+          A Young Person who has taken full advantage of all that Bthecause has to offer…
         </Paragraph>
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          {[
+            "is emotionally resilient",
+            "engages their communities",
+            "is comfortable in their agency",
+            "is attractive to appropriate post-secondary educational institutions or employers",
+            "holds themself accountable",
+            "asks for help and seeks available resources",
+            "has created a life roadmap"
+          ].map((outcome, i) => (
+            <div key={i} className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-100 dark:border-gray-700 shadow-sm">
+              <div className="flex items-center mb-3">
+                <div className="w-8 h-8 rounded-full bg-purple-500/10 flex items-center justify-center mr-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 text-purple-500">
+                    <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <Paragraph className="font-medium text-gray-900 dark:text-white">
+                  {outcome}
+                </Paragraph>
+              </div>
+            </div>
+          ))}
+        </div>
       </SectionContainer>
 
-      {/* --- Brand Break Section --- */}
-      <SectionContainer className="py-10">
-        <Link href="/" className="flex justify-center">
-          <Image
-            src="/logo.png"
-            alt="TheoForge Logo"
-            width={100} // Smaller logo as a divider
-            height={27} // Maintain aspect ratio (approx 120:32 -> 100:26.6)
-            className="dark:invert opacity-80 hover:opacity-100 transition-opacity"
-          />
-        </Link>
+      {/* --- BTC Senior Team --- */}
+      <SectionContainer>
+        <Heading level={2} className="text-center mb-12 font-poppins font-semibold text-3xl text-neutral-900 dark:text-neutral-100">
+          Our Leadership Team
+        </Heading>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          {[
+            { name: "Michael Minor", title: "Founder / Chairman" },
+            { name: "Deborah Delisle", title: "CEO" },
+            { name: "Mark De Revere", title: "Co-Founder / CTO" },
+            { name: "Dr. Hortensia Kelly", title: "Co-Founder / Chief Medical Officer" },
+            { name: "Steve Dawson", title: "Co-Founder / COO" },
+            { name: "Dr. Michele Owens", title: "Chief Clinical Officer" },
+            { name: "Yinka Fadahunsi", title: "Chief Financial Officer" },
+            { name: "Keith Williams", title: "Educational Transformation Lead" }
+          ].map((member, i) => (
+            <div key={i} className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-100 dark:border-gray-700 shadow-sm text-center">
+              <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center overflow-hidden">
+                <Image
+                  src={`/team/${member.name.split(' ').join('')}.jpg`} 
+                  alt={member.name}
+                  width={96}
+                  height={96}
+                  className="object-cover"
+                  onError={(e) => {
+                    // @ts-ignore
+                    e.target.src = "/team/placeholder.jpg";
+                  }}
+                />
+              </div>
+              <Heading level={4} className="text-lg font-semibold mb-1 text-gray-900 dark:text-white">
+                {member.name}
+              </Heading>
+              <Paragraph variant="body2" className="text-sm text-gray-600 dark:text-gray-400">
+                {member.title}
+              </Paragraph>
+            </div>
+          ))}
+        </div>
+      </SectionContainer>
+
+      {/* --- Partners Section --- */}
+      <SectionContainer className="bg-muted/30 dark:bg-muted/10">
+        <Heading level={2} className="text-center mb-8 font-poppins font-semibold text-3xl text-neutral-900 dark:text-neutral-100">
+          Partners
+        </Heading>
+        <div className="flex flex-wrap justify-center items-center gap-8 max-w-4xl mx-auto">
+          {/* Partner logos would go here */}
+          <div className="w-32 h-16 bg-white dark:bg-gray-800 rounded-md flex items-center justify-center">
+            <div className="text-gray-400">Partner Logo</div>
+          </div>
+          <div className="w-32 h-16 bg-white dark:bg-gray-800 rounded-md flex items-center justify-center">
+            <div className="text-gray-400">Partner Logo</div>
+          </div>
+          <div className="w-32 h-16 bg-white dark:bg-gray-800 rounded-md flex items-center justify-center">
+            <div className="text-gray-400">Partner Logo</div>
+          </div>
+          <div className="w-32 h-16 bg-white dark:bg-gray-800 rounded-md flex items-center justify-center">
+            <div className="text-gray-400">Partner Logo</div>
+          </div>
+        </div>
       </SectionContainer>
 
       {/* --- CTA Section --- */}
-      <SectionContainer className="text-center bg-muted/30 dark:bg-muted/10">
+      <SectionContainer className="text-center bg-gradient-to-br from-purple-500/10 via-background to-blue-500/10 dark:from-purple-500/20 dark:via-background-dark dark:to-blue-500/20">
         <Heading level={2} className="mb-4 text-3xl font-poppins font-semibold text-neutral-900 dark:text-neutral-100">
-          Ready to Transform AI Complexity into Confidence?
+          Ready to Empower Your Educational Journey?
         </Heading>
         <Paragraph className="text-lg max-w-2xl mx-auto text-neutral-800 dark:text-neutral-200 mb-6">
-          Let's discuss how TheoForge can help you navigate the AI landscape and build the strategic clarity, technical capabilities, and organizational confidence you need to succeed.
+          Let's discuss how Bthecause can help you navigate the educational landscape and build the resilience, relationships, and resources needed for success.
         </Paragraph>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button href="/contact" variant="secondary" size="lg">
-            Chat with Theophrastus
+          <Button href="/about/learning-lab" variant="secondary" size="lg">
+            Explore Our Learning Lab
           </Button>
           <Button href="/contact" variant="primary" size="lg">
-            Schedule a Consultation
+            Join Our Waitlist
           </Button>
         </div>
       </SectionContainer>

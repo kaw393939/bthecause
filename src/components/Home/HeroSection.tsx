@@ -2,58 +2,63 @@
 
 import React from 'react';
 import Link from 'next/link';
-import Button from '../Common/Button'; // Import the Button component
-import Heading from '../Common/Heading'; // Import the Heading component
-import Paragraph from '../Common/Paragraph'; // Import the Paragraph component
+import Button from '../Common/Button';
+import Heading from '../Common/Heading';
+import Paragraph from '../Common/Paragraph';
 
 const HeroSection = () => (
-  // Replace fixed height with min-height, remove flex center, add explicit padding
   <section
     className="min-h-[90vh] flex flex-col justify-center text-white bg-[url('/hero_star_bg.png')] bg-cover bg-center bg-no-repeat relative overflow-hidden pt-20 sm:pt-24 md:pt-32"
   >
-    {/* Overlay */}
+    {/* Overlay with improved contrast for text readability */}
     <div
-      className="absolute inset-0 bg-black/40 z-10" // Reduced opacity to show more background
+      className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/40 z-10"
     />
-    {/* Content Container: Update to create proper text alignment */}
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 flex flex-col items-center">
-      {/* Inner Content Box: Change to center text alignment for more authority */}
+    
+    {/* Content Container */}
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 flex flex-col items-center">
+      {/* Inner Content Box */}
       <div className="flex flex-col items-center text-center p-6 sm:p-8">
-        {/* Adjust smallest heading size */}
+        {/* Main heading - increased weight and size for authority */}
         <Heading
-          level={1} // H1 equivalent
-          className="font-bold text-white text-3xl sm:text-5xl md:text-6xl mb-8 leading-tight" // Larger, bolder text
+          level={1}
+          className="font-bold text-white text-3xl sm:text-5xl md:text-6xl mb-8 leading-tight"
         >
-          Empower Enterprise Engineering Through Strategic AI Transformation
+          Transforming Education Through Evidence-Based Innovation
         </Heading>
-        {/* Use Paragraph component, variant defaults to body1 */}
-        <Paragraph className="text-white text-xl mb-10 max-w-2xl"> 
-          Enterprise leaders partner with TheoForge for our 
-          <span className="text-secondary font-semibold"> unique 360° perspective</span> that combines hands-on AI implementation, enterprise leadership, and founder experience to 
-          <span className="text-secondary font-semibold"> elevate engineering teams</span> to higher-impact work
+        
+        {/* Subheading with clean, professional messaging */}
+        <Paragraph className="text-white text-xl mb-10 max-w-3xl leading-relaxed">
+          We partner with educational leaders to deliver 
+          <span className="text-secondary-light font-semibold"> research-backed learning solutions</span> that 
+          empower educators, enhance student outcomes, and create lasting educational impact through 
+          <span className="text-secondary-light font-semibold"> innovative instructional approaches</span>.
         </Paragraph>
 
-        {/* Use Button component with Secondary OUTLINE variant */}
+        {/* Call to action buttons */}
         <div className="flex flex-col sm:flex-row gap-4 mt-2">
           <Button 
             variant="primary"
-            href="/about/living-lab" 
-            size="lg" 
-            className="shadow-md"
+            href="/about/learning-lab" 
+            size="lg"
+            className="shadow-md font-medium"
           >
-            Our Living Lab
+            Explore Learning Lab
           </Button>
           <Button 
-            variant="outline"
-            href="/community" 
+            variant="outline" 
+            href="/contact"
             size="lg" 
-            className="border-secondary text-white hover:bg-secondary/10" 
+            className="bg-transparent border-2 border-white text-white hover:bg-white/10 font-medium"
           >
-            Join Our Community
+            Schedule Consultation
           </Button>
         </div>
       </div>
-    </div> 
+    </div>
+    
+    {/* Professional accent line at bottom */}
+    <div className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-primary via-secondary to-accent z-20"></div>
   </section>
 );
 

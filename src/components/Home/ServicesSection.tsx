@@ -16,12 +16,12 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ services }) => {
     <div>
       {/* Use SectionHeading, pass responsive font size class */}
       <SectionHeading className="md:text-5xl mb-4">
-        Core Services for Your AI Transformation
+        Core Services for Educational Transformation
       </SectionHeading>
 
       <div className="max-w-3xl mx-auto mb-10 text-center">
         <p className="text-gray-600 dark:text-gray-300">
-          Strategic guidance and practical implementation to master your <span className="text-secondary font-medium">enterprise AI transformation</span>
+          Strategic guidance and practical implementation to elevate your <span className="text-purple-500 font-medium">educational AI transformation</span>
         </p>
       </div>
 

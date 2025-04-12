@@ -3,21 +3,29 @@ import { Dialog, Tab } from '@headlessui/react';
 import { PhilosopherData, GraphNode } from '@/types/graph';
 
 interface AnalyticsModalProps {
-  open: boolean;
+  open?: boolean;
   onClose: () => void;
-  data: PhilosopherData;
+  data?: PhilosopherData;
+  graphData?: PhilosopherData;
 }
 
-const AnalyticsModal: React.FC<AnalyticsModalProps> = ({ open, onClose, data }) => {
+const AnalyticsModal: React.FC<AnalyticsModalProps> = ({ 
+  open = false, 
+  onClose, 
+  data, 
+  graphData 
+}) => {
+  // Use either graphData (new prop) or data (old prop)
+  const graphDataToUse = graphData || data || { nodes: [], links: [] };
   const [tabValue, setTabValue] = useState(0);
 
   const communityColorClasses = [
-    "bg-teal-600",     // Corresponds to #00796B
-    "bg-blue-600",     // Corresponds to #1976D2
-    "bg-orange-500",   // Corresponds to #FFA000
-    "bg-purple-600",   // Corresponds to #7B1FA2
-    "bg-red-700",      // Corresponds to #C62828
-    "bg-yellow-700"    // Corresponds to #795548 (closest Tailwind match)
+    "bg-purple-600",   // Primary color for Bthecause
+    "bg-blue-600",     
+    "bg-teal-500",     
+    "bg-orange-500",   
+    "bg-green-600",    
+    "bg-yellow-600"    
   ];
 
   const getCommunityColorClass = (community: number | string | undefined): string => {
@@ -31,7 +39,7 @@ const AnalyticsModal: React.FC<AnalyticsModalProps> = ({ open, onClose, data }) 
   };
 
   const calculateInfluenceRanking = () => {
-    return [...data.nodes]
+    return [...graphDataToUse.nodes]
       .sort((a, b) => (b.influenceScore ?? 0) - (a.influenceScore ?? 0))
       .slice(0, 10);
   };
@@ -39,11 +47,11 @@ const AnalyticsModal: React.FC<AnalyticsModalProps> = ({ open, onClose, data }) 
   const calculateConnectivity = () => {
     const connectivity: Record<string, number> = {};
     
-    data.nodes.forEach(node => {
+    graphDataToUse.nodes.forEach(node => {
       connectivity[node.id] = 0;
     });
     
-    data.links.forEach(link => {
+    graphDataToUse.links.forEach(link => {
       const sourceId = typeof link.source === 'object' ? (link.source as GraphNode).id : link.source;
       const targetId = typeof link.target === 'object' ? (link.target as GraphNode).id : link.target;
       
@@ -58,7 +66,7 @@ const AnalyticsModal: React.FC<AnalyticsModalProps> = ({ open, onClose, data }) 
     return Object.entries(connectivity)
       .map(([id, count]) => ({
         id,
-        name: data.nodes.find(node => node.id === id)?.name || id,
+        name: graphDataToUse.nodes.find(node => node.id === id)?.name || id,
         connections: count
       }))
       .sort((a, b) => b.connections - a.connections)
@@ -68,7 +76,7 @@ const AnalyticsModal: React.FC<AnalyticsModalProps> = ({ open, onClose, data }) 
   const calculateEraCounts = () => {
     const eraCounts: { [key: string]: number } = {};
     
-    data.nodes.forEach(node => {
+    graphDataToUse.nodes.forEach(node => {
       if (node.era) { // Only increment if era is defined
         eraCounts[node.era] = (eraCounts[node.era] || 0) + 1;
       }
@@ -123,7 +131,7 @@ const AnalyticsModal: React.FC<AnalyticsModalProps> = ({ open, onClose, data }) 
                   Key Findings
                 </h4>
                 <p className="text-sm text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
-                  This network analysis reveals the complex interconnections between {data.nodes.length} major philosophers across different eras of history. 
+                  This network analysis reveals the complex interconnections between {graphDataToUse.nodes.length} major philosophers across different eras of history. 
                   The visualization demonstrates how ideas have propagated through time, with clear influence patterns emerging.
                 </p>
                 
@@ -270,7 +278,7 @@ const AnalyticsModal: React.FC<AnalyticsModalProps> = ({ open, onClose, data }) 
           <div className="flex justify-end p-4 border-t border-gray-200 dark:border-gray-700">
             <button
               type="button"
-              className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 dark:bg-blue-800 px-4 py-2 text-sm font-medium text-blue-900 dark:text-blue-100 hover:bg-blue-200 dark:hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 transition-colors duration-150"
+              className="inline-flex justify-center rounded-md border border-transparent bg-purple-100 dark:bg-purple-800 px-4 py-2 text-sm font-medium text-purple-900 dark:text-purple-100 hover:bg-purple-200 dark:hover:bg-purple-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 transition-colors duration-150"
               onClick={onClose}
             >
               Close

@@ -24,7 +24,6 @@ const Header: React.FC = () => {
     { label: "About", path: "/about" },
     { label: "Services", path: "/services" },
     { label: "Insights", path: "/insights" },
-    { label: "The Forge", path: "/forge" }, 
     { label: "Community", path: "/community" },
     { label: "Contact", path: "/contact" },
   ];
@@ -37,31 +36,40 @@ const Header: React.FC = () => {
         "backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-neutral-950/60"
       )}
     >
-      <div className="container flex h-16 max-w-screen-2xl items-center justify-between px-4">
-        {/* Logo and Name */}
+      <div className="container flex h-14 max-w-screen-2xl items-center justify-between px-4">
+        {/* Logo - Updated to use the new logo with name included */}
         <Link href="/" className="flex items-center shrink-0 mr-4">
-          <Image
-            className="dark:invert"
-            src="/logo.png"
-            alt="TheoForge Logo"
-            width={60} 
-            height={16}
-            priority
-          />
-          <span className="ml-2 font-poppins font-semibold text-lg text-foreground dark:text-foreground-dark hidden sm:inline">
-            TheoForge
-          </span>
+          <div className="flex items-center justify-center h-full">
+            <Image
+              src="/logo.png"
+              alt="Bthecause Logo"
+              width={180}
+              height={30}
+              className="dark:hidden"
+              priority
+            />
+            <Image
+              src="/logo.png"
+              alt="Bthecause Logo"
+              width={180}
+              height={30}
+              className="hidden dark:block invert"
+              priority
+            />
+          </div>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden sm:flex sm:gap-4 lg:gap-6 flex-grow justify-center">
+        <nav className="hidden sm:flex sm:items-center sm:gap-2 md:gap-4 lg:gap-6 flex-grow justify-end">
            {navItems.map((item) => (
             <Link
               key={item.label}
               href={item.path}
               className={cn(
-                "text-sm font-medium transition-colors hover:text-primary",
-                pathname === item.path ? "text-primary dark:text-primary-light" : "text-muted-foreground"
+                "text-sm font-medium px-2 py-1 rounded-lg transition-colors hover:bg-primary-50 hover:text-primary dark:hover:bg-primary-900/20 dark:hover:text-primary-light",
+                pathname === item.path ? 
+                  "text-primary dark:text-primary-light bg-primary-50 dark:bg-primary-900/20" : 
+                  "text-muted-foreground"
               )}
             >
               {item.label}
@@ -74,7 +82,7 @@ const Header: React.FC = () => {
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" aria-label="Open menu">
-                <MenuIcon className="h-6 w-6" />
+                <MenuIcon className="h-5 w-5" />
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="w-full max-w-sm p-6">
@@ -82,29 +90,38 @@ const Header: React.FC = () => {
               <SheetHeader className="mb-6">
                 <SheetTitle>
                   <Link href="/" className="flex items-center" onClick={(e) => (e.target as HTMLElement).closest<HTMLElement>('[data-radix-sheet-close]')?.click()}>
-                     <Image
-                        className="dark:invert mr-2"
+                    <div className="flex items-center justify-center">
+                      <Image
                         src="/logo.png"
-                        alt="TheoForge Logo"
-                        width={45} // Slightly smaller logo in sheet
-                        height={12}
+                        alt="Bthecause Logo"
+                        width={150}
+                        height={25}
+                        className="dark:hidden"
                         priority
                       />
-                      <span className="font-poppins font-semibold text-lg text-foreground dark:text-foreground-dark">
-                        TheoForge
-                      </span>
+                      <Image
+                        src="/logo.png"
+                        alt="Bthecause Logo"
+                        width={150}
+                        height={25}
+                        className="hidden dark:block invert"
+                        priority
+                      />
+                    </div>
                   </Link>
                 </SheetTitle>
               </SheetHeader>
               {/* Mobile Navigation Links */}
-              <nav className="flex flex-col gap-4 overflow-y-auto">
+              <nav className="flex flex-col gap-1 overflow-y-auto">
                 {navItems.map((item) => (
-                  <SheetClose asChild key={item.label}>
+                  <SheetClose asChild key={item.path}>
                     <Link
                       href={item.path}
                       className={cn(
-                        "block py-2 text-sm font-medium transition-colors hover:text-primary",
-                        pathname === item.path ? "text-primary dark:text-primary-light" : "text-muted-foreground"
+                        "flex items-center py-2 px-3 text-base font-medium rounded-lg transition-colors hover:bg-primary-50 hover:text-primary dark:hover:bg-primary-900/20 dark:hover:text-primary-light",
+                        pathname === item.path ? 
+                          "text-primary dark:text-primary-light bg-primary-50 dark:bg-primary-900/20" : 
+                          "text-muted-foreground"
                       )}
                     >
                       {item.label}
@@ -116,10 +133,15 @@ const Header: React.FC = () => {
           </Sheet>
         </div>
 
-        {/* Optional: Placeholder for CTA button if needed on desktop */}
-        {/* <div className="hidden sm:flex items-center"> */}
-        {/*   <Button>Contact Us</Button> */}
-        {/* </div> */}
+        {/* CTAs and Dark Mode Switch */}
+        <div className="hidden sm:flex items-center ml-4 gap-2">
+          <Button variant="outline" size="sm" href="/contact" className="hidden md:inline-flex">
+            Contact Us
+          </Button>
+          <Button variant="primary" size="sm" href="/about/learning-lab">
+            The Lab
+          </Button>
+        </div>
       </div>
     </header>
   );
