@@ -112,7 +112,7 @@ Liking & Reciprocity: Build genuine relationships with educators by demonstratin
 
 4.2. Target Audiences & Phased Rollout Plan:
 
-Phase 1: Educate & Engage Stakeholders: (Target: Leaders/Policymakers). Goal: Build awareness, articulate urgency/vision, gain strategic buy-in/partnerships. Tactics: Thought leadership, high-level presentations, leveraging networks (esp. Duncan's).
+Phase 1: Educate & Engage Stakeholders: (Target: Leaders/Policymakers). Goal: Build awareness, articulate urgency/vision, gain strategic buy-in/partnerships. Tactics: Thought leadership, high-level presentations, leveraging networks.
 
 Phase 2: Empower Teachers (Pilot & MVP Focus): (Target: Educators). Goal: Deploy initial tools, validate MVP, gather feedback, demonstrate value, build user base. Tactics: Pilot programs, focus on Content Transformation & Socratic Assistant tools, develop targeted PD, gather testimonials (Social Proof). Requires focused delivery of Genesis Engine MVP.
 
