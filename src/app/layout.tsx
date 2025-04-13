@@ -36,7 +36,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: {
     template: `%s | ${siteConfig.name}`,
-    default: `${siteConfig.name} - AI Strategy & Implementation Specialists`,
+    default: `${siteConfig.name} - Educational Renaissance`,
   },
   description: siteConfig.description,
   keywords: siteConfig.keywords,
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: siteConfig.url,
-    title: `${siteConfig.name} - AI Strategy & Implementation | Genesis Engine`,
+    title: `${siteConfig.name} - Educational Renaissance | Bthecause`,
     description: siteConfig.description,
     siteName: siteConfig.name,
     images: [
