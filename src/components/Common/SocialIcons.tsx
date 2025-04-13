@@ -14,9 +14,9 @@ interface SocialLink {
 const socialLinksData: SocialLink[] = [
   {
     name: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/keithwilliams5/', // Updated LinkedIn link
+    href: 'https://www.linkedin.com/company/bthecause/', // Updated LinkedIn link
     icon: FaLinkedinIn,
-    ariaLabel: 'Follow Keith Williams on LinkedIn',
+    ariaLabel: 'Follow Michael B. Minor on LinkedIn',
   },
   {
     name: 'YouTube',

@@ -1,7 +1,7 @@
 ---
 title: "Stop Chasing AI Hype. Start Building Your Strategic Advantage."
 date: 2025-04-06
-author: Keith Williams
+author: Michael B. Minor
 pillar: Strategic AI Vision & Roadmapping
 tags: ["AI Strategy", "Roadmapping", "Business Value", "AI Governance", "Competitive Advantage", "Leadership"]
 image: /images/blog/strategic-roadmap-v2.png # Placeholder

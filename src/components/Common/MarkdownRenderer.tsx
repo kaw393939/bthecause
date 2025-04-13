@@ -2,6 +2,7 @@
 
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
 
 interface MarkdownRendererProps {
   content: string;
@@ -69,7 +70,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => (
       "[&_th]:bg-gray-100 dark:[&_th]:bg-gray-700 [&_th]:font-bold",
     ].join(' ')}
   >
-    <ReactMarkdown>{content}</ReactMarkdown>
+    <ReactMarkdown rehypePlugins={[rehypeRaw]}>{content}</ReactMarkdown>
   </article>
 );
 

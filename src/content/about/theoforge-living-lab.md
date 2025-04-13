@@ -1,7 +1,7 @@
 ---
 title: 'Bthecause: The Learning Innovation Lab'
 excerpt: 'Experience the benefits of working with an education transformation partner that practices what it teaches—our Learning Innovation Lab approach ensures all educational solutions come from direct implementation experience rather than theoretical frameworks.'
-image: '/images/about/living.png'
+image: '/images/about/2_3_transform.png'
 ---
 
 # Innovation Through Implementation: The Bthecause Learning Lab

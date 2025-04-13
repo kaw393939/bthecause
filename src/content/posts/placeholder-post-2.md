@@ -1,7 +1,7 @@
 ---
 title: "RAG vs. Fine-Tuning: Making the Right Call for Your Enterprise LLM"
 date: 2025-04-06
-author: Keith Williams
+author: Michael B. Minor
 pillar: Pragmatic AI Implementation & Modernization
 tags: ["LLM", "RAG", "Fine-Tuning", "AI Implementation", "Knowledge Management", "Model Customization", "Vector Database"]
 image: /images/blog/rag-vs-finetune-v2.png # Placeholder

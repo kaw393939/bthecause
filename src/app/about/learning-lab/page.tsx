@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: `The Learning Innovation Lab | ${siteConfig.name}`,
     description: 'Experience educational AI strategies proven in real learning environments before we implement them for partners.',
-    images: ['/images/about/living.png'],
+    images: ['/images/forge/4_1_learninglab.png'],
   },
 };
 
@@ -26,7 +26,7 @@ export default function LearningLabPage() {
         {/* Upper Section - Image with Overlay */}
         <div className="relative h-[45vh] sm:h-[50vh] md:h-[65vh] overflow-hidden">
           <Image 
-            src="/images/about/living.png" 
+            src="/images/forge/4_1_learninglab.png" 
             alt="Learning Innovation Lab" 
             fill 
             style={{ objectFit: 'cover', objectPosition: 'center 30%' }}

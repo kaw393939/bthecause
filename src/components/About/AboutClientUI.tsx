@@ -174,7 +174,7 @@ export const AboutClientUI: React.FC<AboutClientUIProps> = ({ aboutData }) => {
             { name: "Steve Dawson", title: "Co-Founder / COO" },
             { name: "Dr. Michele Owens", title: "Chief Clinical Officer" },
             { name: "Yinka Fadahunsi", title: "Chief Financial Officer" },
-            { name: "Keith Williams", title: "Educational Transformation Lead" }
+            { name: "Michael B. Minor", title: "Educational Transformation Lead" }
           ].map((member, i) => (
             <div key={i} className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-100 dark:border-gray-700 shadow-sm text-center">
               <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center overflow-hidden">

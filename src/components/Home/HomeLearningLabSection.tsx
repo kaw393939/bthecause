@@ -83,21 +83,13 @@ const HomeLearningLabSection: React.FC = () => {
         
         {/* Image Side */}
         <div className="lg:w-1/2 px-4">
-          <div className="relative rounded-xl overflow-hidden shadow-xl aspect-[4/3]">
-            <Image 
-              src="/images/about/living.png" 
-              alt="Bthecause Learning Lab" 
+          <div className="relative h-[400px] w-full rounded-lg shadow-lg overflow-hidden">
+            <Image
               fill
+              src="/images/about/2_3_transform.png" 
+              alt="Educational Renaissance Laboratory"
               className="object-cover"
-              sizes="(max-width: 768px) 100vw, 50vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-tr from-purple-900/60 via-transparent to-transparent">
-              <div className="absolute bottom-6 left-6">
-                <span className="inline-flex items-center rounded-full bg-purple-100 px-3 py-1 text-sm font-medium text-purple-800">
-                  Innovation Hub
-                </span>
-              </div>
-            </div>
           </div>
         </div>
       </div>

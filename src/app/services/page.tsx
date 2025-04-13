@@ -12,8 +12,8 @@ export const generateMetadata = createMetadataGenerator('services');
 export default async function ServicesPage() {
   const allServicesData: ServiceData[] = await getSortedServicesData();
 
-  const pageTitle = "Our Services";
-  const pageSubtitle = "Integrated services designed to transform AI complexity into confident action and strategic advantage.";
+  const pageTitle = "Educational Transformation Solutions";
+  const pageSubtitle = "Empowering educators and learners with collaborative AI tools and intelligent content systems that foster deep understanding, critical inquiry, and holistic development.";
 
   return (
     <main>

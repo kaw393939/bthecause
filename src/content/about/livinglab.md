@@ -1,7 +1,7 @@
 ---
 title: 'TheoForge: The Living Lab'
 excerpt: 'Experience enterprise AI strategies proven in our own operations before we recommend them to clients.'
-image: '/images/about/living.png'
+image: '/images/about/2_3_transform.png'
 ---
 
 # The Living Lab: AI Strategies Proven in Practice

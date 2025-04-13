@@ -309,8 +309,8 @@
       ]
     },
     {
-      "id": "keith_williams",
-      "name": "Keith Williams",
+      "id": "michaelminor",
+      "name": "Michael B. Minor",
       "era": "Contemporary",
       "community": 5,
       "influenceScore": 8.3,
@@ -569,7 +569,7 @@
       "strength": 0.9
     },
     {
-      "source": "keith_williams",
+      "source": "michaelminor",
       "target": "theophrastus",
       "relation": "Distant Admirer & Conceptual Disciple",
       "strength": 0.5

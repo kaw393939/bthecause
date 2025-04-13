@@ -68,7 +68,7 @@ const Footer: React.FC = () => {
             <nav className="flex flex-col space-y-3">
               {[ 
                 { href: '/about/learning-lab', label: 'Learning Lab' },
-                { href: '/insights/tag/research', label: 'Research' },
+                { href: '/research', label: 'Research' },
                 { href: '/insights/tag/education', label: 'Education' },
                 { href: '/insights/tag/innovation', label: 'Innovation' },
                 { href: '/privacy-policy', label: 'Privacy Policy' },
